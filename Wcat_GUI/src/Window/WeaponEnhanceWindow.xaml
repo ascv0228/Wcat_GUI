@@ -1,0 +1,58 @@
+﻿<Window x:Class="Wcat_GUI.WeaponEnhanceWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="武器淬鍊" Height="300" Width="500" Closing="WindowClosing" ResizeMode="NoResize">
+    <Grid>
+        <Border BorderThickness="1" BorderBrush="LightGray" VerticalAlignment="Top"/>
+        <materialDesign:Card Margin="5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="60"/>
+                </Grid.RowDefinitions>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel>
+                        <Label Content="舊數值" HorizontalAlignment="Stretch" BorderBrush="LightGray" BorderThickness="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="10,10,10,10"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,5,0,0" DockPanel.Dock="Top" VerticalAlignment="Top">
+                            <Label Content="攻擊:" Padding="0,4,4,4" Margin="10,0,0,0"/>
+                            <TextBlock Text="-1" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="preAtk" Margin="0,0,10,0"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,5,0,0" DockPanel.Dock="Top" VerticalAlignment="Top">
+                            <Label Content="防禦:" Padding="0,4,4,4" Margin="10,0,0,0"/>
+                            <TextBlock Text="-1" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="preDef" Margin="0,0,10,0"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,5,0,0" DockPanel.Dock="Top" VerticalAlignment="Top">
+                            <Label Content="會心:" Padding="0,4,4,4" Margin="10,0,0,0"/>
+                            <TextBlock Text="-1" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="preHit" Margin="0,0,10,0"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1">
+                        <Label Content="新數值" HorizontalAlignment="Stretch" BorderBrush="LightGray" BorderThickness="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="10,10,10,10"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,5,0,0" DockPanel.Dock="Top" VerticalAlignment="Top">
+                            <Label Content="攻擊:" Padding="0,4,4,4" Margin="10,0,0,0"/>
+                            <TextBlock Text="-1" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="newAtk" Margin="0,0,10,0"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,5,0,0" DockPanel.Dock="Top" VerticalAlignment="Top">
+                            <Label Content="防禦:" Padding="0,4,4,4" Margin="10,0,0,0"/>
+                            <TextBlock Text="-1" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="newDef" Margin="0,0,10,0"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,5,0,0" DockPanel.Dock="Top" VerticalAlignment="Top">
+                            <Label Content="會心:" Padding="0,4,4,4" Margin="10,0,0,0"/>
+                            <TextBlock Text="-1" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="newHit" Margin="0,0,10,0"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+                <Button x:Name="UpdateWeaponBtn" Grid.Row="1" Height="28" Width="80" Content="強化" Margin="0,0,0,10" Click="UpdateWeaponBtnClick"/>
+            </Grid>
+        </materialDesign:Card>
+    </Grid>
+</Window>

@@ -1,0 +1,24 @@
+﻿<Window x:Class="Wcat_GUI.UpdateInfoWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="升級內容" Height="350" Width="550" ResizeMode="NoResize">
+    <Grid>
+        <Border BorderThickness="1" BorderBrush="LightGray" VerticalAlignment="Top"/>
+        <materialDesign:Card Margin="7">
+            <TextBox VerticalScrollBarVisibility="Auto" x:Name="terminal" IsReadOnly="True" Margin="10" TextWrapping="Wrap">
+                <TextBox.Style>
+                    <Style TargetType="{x:Type TextBox}">
+                        <Style.Triggers>
+                            <Trigger Property="IsFocused" Value="true">
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+            </TextBox>
+        </materialDesign:Card>
+    </Grid>
+</Window>

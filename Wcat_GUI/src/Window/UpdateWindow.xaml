@@ -1,0 +1,24 @@
+﻿<Window x:Class="Wcat_GUI.UpdateWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:Wcat_GUI"
+        mc:Ignorable="d"
+        Title="版本資訊" ResizeMode="NoResize" Height="200" Width="340" Closing="WindowClosing">
+    <Grid>
+        <Border BorderThickness="1" BorderBrush="LightGray" VerticalAlignment="Top"/>
+        <materialDesign:Card Margin="5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <TextBlock x:Name="versionInfo" HorizontalAlignment="Center" VerticalAlignment="Center" Text="當前版本: " />
+                <Button x:Name="checkVersionBtn" Grid.Row="1" Height="25" Width="100" Content="檢查更新" Margin="0,0,0,10" Click="Button_Click"/>
+            </Grid>
+        </materialDesign:Card>
+    </Grid>
+</Window>

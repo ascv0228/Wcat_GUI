@@ -1,0 +1,119 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>res/icon.ico</ApplicationIcon>
+    <StartupObject />
+    
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="res\icon_clear.png" />
+    <None Remove="res\icon_load.png" />
+	<None Remove="res\icon_save.png" />
+	<None Remove="res\png\icon_jewel.png" />
+	<None Remove="res\png\icon_gold.png" />
+	<None Remove="res\png\icon_soul.png" />
+	<None Remove="res\png\icon_lock.png" />
+	<None Remove="res\png\icon_unlock.png" />
+	<None Remove="res\accessory\icon_accessory_non.png" />
+	<None Remove="res\accessory\icon_accessory_1.png" />
+	<None Remove="res\accessory\icon_accessory_2.png" />
+	<None Remove="res\accessory\icon_accessory_3.png" />
+	<None Remove="res\accessory\icon_accessory_4.png" />
+	<None Remove="res\accessory\icon_accessory_5.png" />
+	<None Remove="res\accessory\icon_accessory_6.png" />
+	<None Remove="res\accessory\icon_accessory_7.png" />
+	<None Remove="res\accessory\icon_accessory_8.png" />
+	<None Remove="res\accessory\icon_accessory_99.png" />
+	<None Remove="res\accessory\icon_accessory_100.png" />
+	<None Remove="res\category\icon_Job_non.png" />
+	<None Remove="res\category\icon_Job_1.png" />
+	<None Remove="res\category\icon_Job_2.png" />
+	<None Remove="res\category\icon_Job_3.png" />
+	<None Remove="res\category\icon_Job_4.png" />
+	<None Remove="res\category\icon_Job_5.png" />
+	<None Remove="res\category\icon_Job_6.png" />
+	<None Remove="res\category\icon_Job_7.png" />
+	<None Remove="res\category\icon_Job_8.png" />
+	<None Remove="res\category\icon_Job_9.png" />
+	<None Remove="res\category\icon_Job_10.png" />
+	<None Remove="res\category\icon_Job_11.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Remove="src\App.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Google.Apis.Drive.v3" Version="1.43.0.1860" />
+    <PackageReference Include="HIT.Dragablz" Version="1.0.0" />
+    <PackageReference Include="Ionic.Zlib.Core" Version="1.0.0" />
+    <PackageReference Include="MaterialDesignThemes" Version="3.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ApplicationDefinition Include="src\App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </ApplicationDefinition>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="res\icon_clear.png" />
+    <Resource Include="res\icon_load.png" />
+    <Resource Include="res\icon_save.png" />
+	<Resource Include="res\png\icon_jewel.png" />
+	<Resource Include="res\png\icon_gold.png" />
+	<Resource Include="res\png\icon_soul.png" />
+	<Resource Include="res\png\icon_lock.png" />
+	<Resource Include="res\png\icon_unlock.png" />
+	<Resource Include="res\accessory\icon_accessory_non.png" />
+	<Resource Include="res\accessory\icon_accessory_1.png" />
+	<Resource Include="res\accessory\icon_accessory_2.png" />
+	<Resource Include="res\accessory\icon_accessory_3.png" />
+	<Resource Include="res\accessory\icon_accessory_4.png" />
+	<Resource Include="res\accessory\icon_accessory_5.png" />
+	<Resource Include="res\accessory\icon_accessory_6.png" />
+	<Resource Include="res\accessory\icon_accessory_7.png" />
+	<Resource Include="res\accessory\icon_accessory_8.png" />
+	<Resource Include="res\accessory\icon_accessory_99.png" />
+	<Resource Include="res\accessory\icon_accessory_100.png" />
+    <Resource Include="res\category\icon_Job_non.png" />
+    <Resource Include="res\category\icon_Job_1.png" />
+    <Resource Include="res\category\icon_Job_2.png" />
+    <Resource Include="res\category\icon_Job_3.png" />
+    <Resource Include="res\category\icon_Job_4.png" />
+    <Resource Include="res\category\icon_Job_5.png" />
+    <Resource Include="res\category\icon_Job_6.png" />
+    <Resource Include="res\category\icon_Job_7.png" />
+    <Resource Include="res\category\icon_Job_8.png" />
+    <Resource Include="res\category\icon_Job_9.png" />
+    <Resource Include="res\category\icon_Job_10.png" />
+    <Resource Include="res\category\icon_Job_11.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Wcat">
+      <HintPath>D:\Wcat\Wcat\bin\Debug\netcoreapp3.1\Wcat.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="data\ItemsInfo.dat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="data\key.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="key.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="update.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

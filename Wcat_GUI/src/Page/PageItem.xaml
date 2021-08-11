@@ -1,0 +1,1089 @@
+﻿<UserControl x:Class="Wcat_GUI.PageItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <materialDesign:Card Margin="7,7,7,0">
+                <StackPanel Orientation="Horizontal" Margin="10,0,10,0" VerticalAlignment="Center" Height="38">
+                    <Button Content="角色" x:Name="cardBtn" Height="25" Width="70" Background="DodgerBlue" BorderBrush="{x:Null}" Foreground="White" Click="CardBtnClick" IsEnabled="False"/>
+                    <Button Content="武器" x:Name="weaponBtn" Height="25" Width="70" Background="SkyBlue" BorderBrush="{x:Null}" Foreground="White" Margin="3,0,0,0" Click="WeaponBtnClick"/>
+                    <Button Content="物品" x:Name="itemBtn" Height="25" Width="70" Background="SkyBlue" BorderBrush="{x:Null}" Foreground="White" Margin="3,0,0,0" Click="ItemBtnClick"/>
+                    <Button Content="飾品" x:Name="accessoryBtn" Height="25" Width="70" Background="SkyBlue" BorderBrush="{x:Null}" Foreground="White" Margin="3,0,0,0" Click="AccessoryBtnClick"/>
+                    <Button Content="石板" x:Name="fragmentBtn" Height="25" Width="70" Background="SkyBlue" BorderBrush="{x:Null}" Foreground="White" Margin="3,0,0,0" Click="FragmentBtnClick"/>
+                </StackPanel>
+            </materialDesign:Card>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1.7*"/>
+            </Grid.ColumnDefinitions>
+
+            <materialDesign:Card Grid.Column="0" Margin="7,7,3.5,7">
+                <Grid>
+                    <Grid  Grid.Row="1" x:Name="CardPanel1" Visibility="Hidden">
+                        <StackPanel>
+                            <Label Content="角色篩選" HorizontalAlignment="Stretch" BorderBrush="LightGray" BorderThickness="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MouseLeftButtonUp="DisableReceivePanel" Margin="10,30,10,5"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox Grid.Column="0" x:Name="ItemCardExceedFilter" Content="只顯示角色可突破" HorizontalAlignment="Stretch" Margin="10,10,0,0" VerticalAlignment="Top" Click="GetItemCardFilters_Click"/>
+                                <CheckBox Grid.Column="1" x:Name="ItemCardLv150Filter" Content="只顯示等級未150" HorizontalAlignment="Stretch" Margin="0,10,0,0"  VerticalAlignment="Top" Click="GetItemCardFilters_Click"/>
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox Grid.Column="0" x:Name="ItemCardskillFilter" Content="只顯示技能可覺醒" HorizontalAlignment="Stretch" Margin="10,10,0,0" VerticalAlignment="Top" Click="GetItemCardFilters_Click"/>
+                                <CheckBox Grid.Column="1" x:Name="ItemCardUnlockEXFilter" Content="只顯示EX星盤未滿" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="133" Click="GetItemCardFilters_Click"/>
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox Grid.Column="0" x:Name="ItemCardnoCCFilter" Content="只顯示角色未轉職" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="GetItemCardFilters_Click"/>
+                                <CheckBox Grid.Column="1" x:Name="ItemCardyesCCFilter" Content="只顯示角色已轉職" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Click="GetItemCardFilters_Click"/>
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox Grid.Column="0" x:Name="ItemCardUnlockFilter" Content="只顯示角色未鎖定" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="GetItemCardFilters_Click"/>
+                                <CheckBox Grid.Column="1" x:Name="ItemCardLockFilter" Content="只顯示角色已鎖定" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Click="GetItemCardFilters_Click"/>
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                </Grid.ColumnDefinitions>
+                            </Grid>
+
+                            <Label Content="全角色執行" HorizontalAlignment="Stretch" BorderBrush="LightGray" BorderThickness="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MouseLeftButtonUp="DisableReceivePanel" Margin="10,20,10,5"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Button x:Name="autoLevelUp100" Click="AutoLevelUp100Click" HorizontalAlignment="Stretch" Height="25" Style="{DynamicResource MaterialDesignRaisedButton}" Content="升級100" Margin="10,10,5,0">
+                                    <Button.ToolTip>
+                                        <ToolTip>
+                                            <StackPanel>
+                                                <TextBlock Text="將未達LV100的角色升至LV100" />
+                                            </StackPanel>
+                                        </ToolTip>
+                                    </Button.ToolTip>
+                                </Button>
+                                <Button Grid.Column="1" x:Name="autoLevelUp150" Click="AutoLevelUp150Click" HorizontalAlignment="Stretch" Height="25" Style="{DynamicResource MaterialDesignRaisedButton}" Content="升級150" Margin="5,10,5,0" >
+                                    <Button.ToolTip>
+                                        <ToolTip>
+                                            <StackPanel>
+                                                <TextBlock Text="將未達LV150的角色升至滿級" />
+                                            </StackPanel>
+                                        </ToolTip>
+                                    </Button.ToolTip>
+                                </Button>
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Button x:Name="autoTalkRead" Click="AutoTalkReadClick" HorizontalAlignment="Stretch" Height="25" Style="{DynamicResource MaterialDesignRaisedButton}" Content="閱讀劇情" Margin="10,10,5,0">
+                                    <Button.ToolTip>
+                                        <ToolTip>
+                                            <StackPanel>
+                                                <TextBlock Text="自動閱讀未閱讀的回憶劇情" />
+                                            </StackPanel>
+                                        </ToolTip>
+                                    </Button.ToolTip>
+                                </Button>
+                                <Button Grid.Column="1" x:Name="autoExceed" Click="AutoExceedClick" HorizontalAlignment="Stretch" Height="25" Style="{DynamicResource MaterialDesignRaisedButton}" Content="突破界限" Margin="5,10,5,0" >
+                                    <Button.ToolTip>
+                                        <ToolTip>
+                                            <StackPanel>
+                                                <TextBlock Text="自動突破界限" />
+                                            </StackPanel>
+                                        </ToolTip>
+                                    </Button.ToolTip>
+                                </Button>
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Button x:Name="autoSkillLevelUp" Click="AutoSkillLevelUpClick" HorizontalAlignment="Stretch" Height="25" Style="{DynamicResource MaterialDesignRaisedButton}" Content="技能覺醒" Margin="10,10,5,0">
+                                    <Button.ToolTip>
+                                        <ToolTip>
+                                            <StackPanel>
+                                                <TextBlock Text="全角色技能覺醒，並自動領取轉職珠" />
+                                            </StackPanel>
+                                        </ToolTip>
+                                    </Button.ToolTip>
+                                </Button>
+                                <Button Grid.Column="1" x:Name="autoTransfer" Click="AutoTransferClick" HorizontalAlignment="Stretch" Height="25" Style="{DynamicResource MaterialDesignRaisedButton}" Content="自動轉職" Margin="5,10,5,0" >
+                                    <Button.ToolTip>
+                                        <ToolTip>
+                                            <StackPanel>
+                                                <TextBlock Text="自動領取轉職珠和魂石,並轉職未轉職之角色" />
+                                            </StackPanel>
+                                        </ToolTip>
+                                    </Button.ToolTip>
+                                </Button>
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Button x:Name="autoUnlockEX" Click="AutoUnlockEXClick" HorizontalAlignment="Stretch" Height="25" Style="{DynamicResource MaterialDesignRaisedButton}" Content="EX星盤解鎖" Margin="10,10,5,0">
+                                    <Button.ToolTip>
+                                        <ToolTip>
+                                            <StackPanel>
+                                                <TextBlock Text="全角色EX星盤解鎖" />
+                                            </StackPanel>
+                                        </ToolTip>
+                                    </Button.ToolTip>
+                                </Button>
+                                <Button Grid.Column="1" x:Name="autoLoveUpToMax" Click="AutoLoveUpToMaxClick" HorizontalAlignment="Stretch" Height="25" Style="{DynamicResource MaterialDesignRaisedButton}" Content="親密度增加" Margin="5,10,5,0" >
+                                    <Button.ToolTip>
+                                        <ToolTip>
+                                            <StackPanel>
+                                                <TextBlock Text="使用符文&quot;精心好禮&quot;提升角色親密度" />
+                                            </StackPanel>
+                                        </ToolTip>
+                                    </Button.ToolTip>
+                                </Button>
+                            </Grid>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="1" x:Name="weaponPanel1" Visibility="Hidden">
+                        <StackPanel Grid.Row="0" Orientation="Vertical" Margin="0,5,0,0" DockPanel.Dock="Top" x:Name="WeaponRarityreceviePanel">
+                            <Label Content="武器稀有度篩選" HorizontalAlignment="Stretch" BorderBrush="LightGray" BorderThickness="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MouseLeftButtonUp="DisableReceivePanel" Margin="10,10,10,5"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox Grid.Column="0" x:Name="WeaponFilterStar1" Content="1☆" HorizontalAlignment="Stretch" Margin="10,10,0,0" VerticalAlignment="Top" />
+                                <CheckBox Grid.Column="1" x:Name="WeaponFilterStar2" Content="2☆" HorizontalAlignment="Stretch" Margin="10,10,0,0"  VerticalAlignment="Top"/>
+                                <CheckBox Grid.Column="2" x:Name="WeaponFilterStar3" Content="3☆" HorizontalAlignment="Stretch" Margin="10,10,0,0"  VerticalAlignment="Top"/>
+                                <CheckBox Grid.Column="3" x:Name="WeaponFilterStar4" Content="4☆" HorizontalAlignment="Stretch" Margin="10,10,0,0"  VerticalAlignment="Top"/>
+                                <CheckBox Grid.Column="4" x:Name="WeaponFilterStar5" Content="5☆" HorizontalAlignment="Stretch" Margin="10,10,0,0"  VerticalAlignment="Top"/>
+                            </Grid>
+                            <Label Content="武器職業篩選" HorizontalAlignment="Stretch" BorderBrush="LightGray" BorderThickness="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MouseLeftButtonUp="DisableReceivePanel" Margin="10,10,10,5"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox Grid.Column="0" x:Name="WeaponFilterJobAll" Content="全選" HorizontalAlignment="Stretch" Margin="10,12,-40,0" VerticalAlignment="Top"/>
+                                <CheckBox Grid.Column="2" x:Name="WeaponFilterJob1" HorizontalAlignment="Stretch" Margin="10,12,0,0" VerticalAlignment="Top"/>
+                                <Image Grid.Column="3" Source="/res/category/icon_Job_1.png" Height="20" Width="20" Margin="-15,12,0,0"/>
+                                <CheckBox Grid.Column="4" x:Name="WeaponFilterJob2" HorizontalAlignment="Stretch" Margin="10,12,0,0" VerticalAlignment="Top"/>
+                                <Image Grid.Column="5" Source="/res/category/icon_Job_2.png" Height="20" Width="20" Margin="-15,12,0,0"/>
+                                <CheckBox Grid.Column="6" x:Name="WeaponFilterJob3" HorizontalAlignment="Stretch" Margin="10,12,0,0" VerticalAlignment="Top"/>
+                                <Image Grid.Column="7" Source="/res/category/icon_Job_3.png" Height="20" Width="20" Margin="-15,12,0,0"/>
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox Grid.Column="0" x:Name="WeaponFilterJob4" HorizontalAlignment="Stretch" Margin="10,12,0,0" VerticalAlignment="Top"/>
+                                <Image Grid.Column="1" Source="/res/category/icon_Job_4.png" Height="20" Width="20" Margin="-15,12,0,0"/>
+                                <CheckBox Grid.Column="2" x:Name="WeaponFilterJob5" HorizontalAlignment="Stretch" Margin="10,12,0,0" VerticalAlignment="Top"/>
+                                <Image Grid.Column="3" Source="/res/category/icon_Job_5.png" Height="20" Width="20" Margin="-15,12,0,0"/>
+                                <CheckBox Grid.Column="4" x:Name="WeaponFilterJob6" HorizontalAlignment="Stretch" Margin="10,12,0,0" VerticalAlignment="Top"/>
+                                <Image Grid.Column="5" Source="/res/category/icon_Job_6.png" Height="20" Width="20" Margin="-15,12,0,0"/>
+                                <CheckBox Grid.Column="6" x:Name="WeaponFilterJob7" HorizontalAlignment="Stretch" Margin="10,12,0,0" VerticalAlignment="Top"/>
+                                <Image Grid.Column="7" Source="/res/category/icon_Job_7.png" Height="20" Width="20" Margin="-15,12,0,0"/>
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox Grid.Column="0" x:Name="WeaponFilterJob8" HorizontalAlignment="Stretch" Margin="10,12,0,0" VerticalAlignment="Top"/>
+                                <Image Grid.Column="1" Source="/res/category/icon_Job_8.png" Height="20" Width="20" Margin="-15,12,0,0"/>
+                                <CheckBox Grid.Column="2" x:Name="WeaponFilterJob9" HorizontalAlignment="Stretch" Margin="10,12,0,0" VerticalAlignment="Top"/>
+                                <Image Grid.Column="3" Source="/res/category/icon_Job_9.png" Height="20" Width="20" Margin="-15,12,0,0"/>
+                                <CheckBox Grid.Column="4" x:Name="WeaponFilterJob10" HorizontalAlignment="Stretch" Margin="10,12,0,0" VerticalAlignment="Top"/>
+                                <Image Grid.Column="5" Source="/res/category/icon_Job_10.png" Height="20" Width="20" Margin="-15,12,0,0"/>
+                                <CheckBox Grid.Column="6" x:Name="WeaponFilterJob11" HorizontalAlignment="Stretch" Margin="10,12,0,0" VerticalAlignment="Top"/>
+                                <Image Grid.Column="7" Source="/res/category/icon_Job_11.png" Height="20" Width="20" Margin="-15,12,0,0"/>
+                            </Grid>
+                            <Label Content="其他篩選" HorizontalAlignment="Stretch" BorderBrush="LightGray" BorderThickness="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MouseLeftButtonUp="DisableReceivePanel" Margin="10,10,10,5"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox Grid.Column="0" x:Name="WeaponFilterCanEnStrength" Content="只顯示可強化武器" HorizontalAlignment="Stretch" Margin="10,10,0,0" VerticalAlignment="Top" />
+                                <CheckBox Grid.Column="1" x:Name="WeaponFilterUnLock" Content="只顯示未鎖定武器" HorizontalAlignment="Stretch" Margin="10,10,0,0"  VerticalAlignment="Top"/>
+                            </Grid>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,5,0,60" DockPanel.Dock="Top" HorizontalAlignment="Center">
+                            <Button x:Name="autoCompoWeapon" Click="AutoCompoWeaponClick" Height="33" Width="120"  Style="{DynamicResource MaterialDesignRaisedButton}" VerticalAlignment="Bottom" Content="武器強化" Margin="10,0,0,0">
+                                <Button.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <TextBlock Text="所有武器強化並進化至滿級" />
+                                        </StackPanel>
+                                    </ToolTip>
+                                </Button.ToolTip>
+                            </Button>
+                            <Button x:Name="autoCombine" Click="AutoCombineClick" Height="33" Width="120"  Style="{DynamicResource MaterialDesignRaisedButton}" VerticalAlignment="Bottom" Content="武器合成" Margin="10,0,0,0">
+                                <Button.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <TextBlock Text="重複且未鎖定的武器當作素材合成" />
+                                        </StackPanel>
+                                    </ToolTip>
+                                </Button.ToolTip>
+                            </Button>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,5,0,20" DockPanel.Dock="Top" HorizontalAlignment="Center">
+                            <Button x:Name="WeaponExchange" Click="WeaponExchangeClick" Height="33" Width="120"  Style="{DynamicResource MaterialDesignRaisedButton}" VerticalAlignment="Bottom" Content="武器交換" Margin="10,0,0,0"/>
+                            <Button x:Name="WeaponSkillExchange" Click="WeaponEnhanceClick" Height="33" Width="120"  Style="{DynamicResource MaterialDesignRaisedButton}" VerticalAlignment="Bottom" Content="技能變換" Margin="10,0,0,0"/>
+                        </StackPanel>
+
+                    </Grid>
+                    <Grid Grid.Row="1" x:Name="itemPanel1" Visibility="Hidden">
+                        <StackPanel Grid.Row="0" Orientation="Vertical" Margin="0,5,0,0" DockPanel.Dock="Top" x:Name="ItemItemreceviePanel">
+                            <Label Content="符文篩選" HorizontalAlignment="Stretch" BorderBrush="LightGray" BorderThickness="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MouseLeftButtonUp="DisableReceivePanel" Margin="10,10,10,5"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox Grid.Column="0" x:Name="ItemFilterNormal" Content="一般符文" HorizontalAlignment="Stretch" Margin="10,10,0,0" VerticalAlignment="Top" />
+                                <CheckBox Grid.Column="1" x:Name="ItemFilterTime" Content="縮時票卷" HorizontalAlignment="Stretch" Margin="10,10,0,0"  VerticalAlignment="Top"/>
+                                <CheckBox Grid.Column="2" x:Name="ItemFilterBrick" Content="彩虹晶磚" HorizontalAlignment="Stretch" Margin="10,10,0,0"  VerticalAlignment="Top"/>
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox Grid.Column="0" x:Name="ItemFilterBag" Content="福袋" HorizontalAlignment="Stretch" Margin="10,10,0,0"  VerticalAlignment="Top"/>
+                                <CheckBox Grid.Column="1" x:Name="ItemFilterBook" Content="加倍書/變身福袋" HorizontalAlignment="Stretch" Margin="10,10,-50,0"  VerticalAlignment="Top"/>
+                            </Grid>
+
+                            <StackPanel Orientation="Horizontal" Margin="10,30,0,0" DockPanel.Dock="Top">
+                                <Label Content="轉職珠數量:" Padding="0,4,4,4" Margin="10,0,0,0"/>
+                                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="textTransferNum" Margin="0,0,10,0"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="1" x:Name="accessoryPanel1" Visibility="Hidden">
+                        <StackPanel Grid.Row="0" Orientation="Vertical" Margin="0,5,0,0" DockPanel.Dock="Top" x:Name="AccessoryRarityreceviePanel">
+                            <Label Content="飾品稀有度篩選" HorizontalAlignment="Stretch" BorderBrush="LightGray" BorderThickness="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MouseLeftButtonUp="DisableReceivePanel" Margin="10,10,10,5"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox Grid.Column="0" x:Name="AccessoryFilterStar1" Content="1☆" HorizontalAlignment="Stretch" Margin="10,10,0,0" VerticalAlignment="Top" />
+                                <CheckBox Grid.Column="1" x:Name="AccessoryFilterStar2" Content="2☆" HorizontalAlignment="Stretch" Margin="10,10,0,0"  VerticalAlignment="Top"/>
+                                <CheckBox Grid.Column="2" x:Name="AccessoryFilterStar3" Content="3☆" HorizontalAlignment="Stretch" Margin="10,10,0,0"  VerticalAlignment="Top"/>
+                                <CheckBox Grid.Column="3" x:Name="AccessoryFilterStar4" Content="4☆" HorizontalAlignment="Stretch" Margin="10,10,0,0"  VerticalAlignment="Top"/>
+                            </Grid>
+                            <Label Content="飾品技能篩選" HorizontalAlignment="Stretch" BorderBrush="LightGray" BorderThickness="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MouseLeftButtonUp="DisableReceivePanel" Margin="10,10,10,5"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox Grid.Column="0" x:Name="AccessoryFilterSkill1" HorizontalAlignment="Stretch" Margin="10,12,0,0" VerticalAlignment="Top"/>
+                                <Image Grid.Column="1" Source="/res/accessory/icon_accessory_1.png" Height="22" Width="22" Margin="-15,10,0,0"/>
+                                <CheckBox Grid.Column="2" x:Name="AccessoryFilterSkill2" HorizontalAlignment="Stretch" Margin="10,12,0,0" VerticalAlignment="Top"/>
+                                <Image Grid.Column="3" Source="/res/accessory/icon_accessory_2.png" Height="22" Width="22" Margin="-15,10,0,0"/>
+                                <CheckBox Grid.Column="4" x:Name="AccessoryFilterSkill3" HorizontalAlignment="Stretch" Margin="10,12,0,0" VerticalAlignment="Top"/>
+                                <Image Grid.Column="5" Source="/res/accessory/icon_accessory_3.png" Height="22" Width="22" Margin="-15,10,0,0"/>
+                                <CheckBox Grid.Column="6" x:Name="AccessoryFilterSkill4" HorizontalAlignment="Stretch" Margin="10,12,0,0" VerticalAlignment="Top"/>
+                                <Image Grid.Column="7" Source="/res/accessory/icon_accessory_4.png" Height="22" Width="22" Margin="-15,10,0,0"/>
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox Grid.Column="0" x:Name="AccessoryFilterSkill5" HorizontalAlignment="Stretch" Margin="10,12,0,0" VerticalAlignment="Top"/>
+                                <Image Grid.Column="1" Source="/res/accessory/icon_accessory_5.png" Height="22" Width="22" Margin="-15,10,0,0"/>
+                                <CheckBox Grid.Column="2" x:Name="AccessoryFilterSkill6" HorizontalAlignment="Stretch" Margin="10,12,0,0" VerticalAlignment="Top"/>
+                                <Image Grid.Column="3" Source="/res/accessory/icon_accessory_6.png" Height="22" Width="22" Margin="-15,10,0,0"/>
+                                <CheckBox Grid.Column="4" x:Name="AccessoryFilterSkill7" HorizontalAlignment="Stretch" Margin="10,12,0,0" VerticalAlignment="Top"/>
+                                <Image Grid.Column="5" Source="/res/accessory/icon_accessory_7.png" Height="22" Width="22" Margin="-15,10,0,0"/>
+                                <CheckBox Grid.Column="6" x:Name="AccessoryFilterSkill8" HorizontalAlignment="Stretch" Margin="10,12,0,0" VerticalAlignment="Top"/>
+                                <Image Grid.Column="7" Source="/res/accessory/icon_accessory_8.png" Height="22" Width="22" Margin="-15,10,0,0"/>
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox Grid.Column="0" x:Name="AccessoryFilterSkill99" HorizontalAlignment="Stretch" Margin="10,12,0,0" VerticalAlignment="Top"/>
+                                <Image Grid.Column="1" Source="/res/accessory/icon_accessory_99.png" Height="22" Width="22" Margin="-15,10,0,0"/>
+                                <CheckBox Grid.Column="2" x:Name="AccessoryFilterSkill100" HorizontalAlignment="Stretch" Margin="10,12,0,0" VerticalAlignment="Top"/>
+                                <Image Grid.Column="3" Source="/res/accessory/icon_accessory_100.png" Height="22" Width="22" Margin="-15,10,0,0"/>
+                            </Grid>
+                            <Label Content="其他篩選" HorizontalAlignment="Stretch" BorderBrush="LightGray" BorderThickness="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MouseLeftButtonUp="DisableReceivePanel" Margin="10,10,10,5"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox Grid.Column="0" x:Name="AccessoryFilterLock" Content="已鎖定" HorizontalAlignment="Stretch" Margin="10,10,0,0" VerticalAlignment="Top" />
+                                <CheckBox Grid.Column="1" x:Name="AccessoryFilterUnLock" Content="未鎖定" HorizontalAlignment="Stretch" Margin="10,10,0,0"  VerticalAlignment="Top"/>
+                            </Grid>
+                        </StackPanel>
+
+                    </Grid>
+                    <Grid Grid.Row="1" x:Name="fragmentPanel1" Visibility="Visible">
+                        <StackPanel Grid.Row="0" Orientation="Vertical" Margin="0,5,0,0" DockPanel.Dock="Top" x:Name="FragmentRarityreceviePanel">
+                            <Label Content="石板稀有度篩選" HorizontalAlignment="Stretch" BorderBrush="LightGray" BorderThickness="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MouseLeftButtonUp="DisableReceivePanel" Margin="10,10,10,5"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox Grid.Column="0" x:Name="FragmentFilterStar1" Content="1☆" HorizontalAlignment="Stretch" Margin="10,10,0,0" VerticalAlignment="Top" />
+                                <CheckBox Grid.Column="1" x:Name="FragmentFilterStar2" Content="2☆" HorizontalAlignment="Stretch" Margin="10,10,0,0"  VerticalAlignment="Top"/>
+                                <CheckBox Grid.Column="2" x:Name="FragmentFilterStar3" Content="3☆" HorizontalAlignment="Stretch" Margin="10,10,0,0"  VerticalAlignment="Top"/>
+                                <CheckBox Grid.Column="3" x:Name="FragmentFilterStar4" Content="4☆" HorizontalAlignment="Stretch" Margin="10,10,0,0"  VerticalAlignment="Top"/>
+                            </Grid>
+                            <Label Content="其他篩選" HorizontalAlignment="Stretch" BorderBrush="LightGray" BorderThickness="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MouseLeftButtonUp="DisableReceivePanel" Margin="10,10,10,5"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox Grid.Column="0" x:Name="FragmentFilterLock" Content="已鎖定" HorizontalAlignment="Stretch" Margin="10,10,0,0" VerticalAlignment="Top" />
+                                <CheckBox Grid.Column="1" x:Name="FragmentFilterUnLock" Content="未鎖定" HorizontalAlignment="Stretch" Margin="10,10,0,0"  VerticalAlignment="Top"/>
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox Grid.Column="0" x:Name="FragmentFilterLvMax" Content="已滿級" HorizontalAlignment="Stretch" Margin="10,10,0,0" VerticalAlignment="Top" />
+                                <CheckBox Grid.Column="1" x:Name="FragmentFilterUnLvMax" Content="未滿級" HorizontalAlignment="Stretch" Margin="10,10,0,0"  VerticalAlignment="Top"/>
+                            </Grid>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Margin="0,300,0,0" DockPanel.Dock="Top" HorizontalAlignment="Left">
+                            <CheckBox Grid.Column="1" x:Name="FragmentFilterSpecialRune" Content="只輸出特殊符文" HorizontalAlignment="Stretch" Margin="30,10,0,0"  VerticalAlignment="Top"/>
+                            <Button x:Name="autoCompoFragment" Click="AutoCompoFragmentClick" Height="33" Width="100"  Style="{DynamicResource MaterialDesignRaisedButton}" VerticalAlignment="Bottom" Content="石板強化" Margin="20,0,0,0">
+                                <Button.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <TextBlock Text="所有石板強化至滿級" />
+                                        </StackPanel>
+                                    </ToolTip>
+                                </Button.ToolTip>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </materialDesign:Card>
+            <materialDesign:Card Grid.Column="1" Margin="3.5,7,7,7">
+                <Grid>
+                    <Grid Grid.Row="1" x:Name="CardPanel2" Visibility="Visible">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="200"/>
+                            <RowDefinition/>
+                            <RowDefinition Height="60"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="1">
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <TextBox x:Name="Itemcardsearch" Grid.Column="0" Margin="10,10,10,10" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" PreviewTextInput="OnPreviewTextInput1" TextChanged="OnTextChanged1">
+                                    <TextBox.Style>
+                                        <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
+                                            <Style.Resources>
+                                                <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                                    <VisualBrush.Visual>
+                                                        <Label Content="搜尋" Foreground="Gray" />
+                                                    </VisualBrush.Visual>
+                                                </VisualBrush>
+                                            </Style.Resources>
+                                            <Style.Triggers>
+                                                <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                                    <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                                </Trigger>
+                                                <Trigger Property="Text" Value="{x:Null}">
+                                                    <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                                </Trigger>
+                                                <Trigger Property="IsKeyboardFocused" Value="True">
+                                                    <Setter Property="Background" Value="LightBlue" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBox.Style>
+                                </TextBox>
+                                <ComboBox Grid.Column="1" x:Name="Itemcardtroop" Margin="0,10,10,10" ItemsSource="{Binding cccccccccardsView1}" IsTextSearchEnabled="False" IsEditable="True" IsReadOnly="True" DisplayMemberPath="cardInfo"/>
+                            </Grid>
+
+                            <StackPanel Orientation="Horizontal" Margin="0,5,0,0" DockPanel.Dock="Top">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <Button Grid.Column="0" Name="ACardLock" Click="ACardLockClick" BorderThickness="0" Margin="20,0,0,0" Height="20" Width="20" Visibility="Visible">
+                                        <Control.Background>
+                                            <ImageBrush ImageSource="/res/png/icon_unlock.png" />
+                                        </Control.Background>
+                                        <FrameworkElement.ToolTip>
+                                            <ToolTip>
+                                                <StackPanel>
+                                                    <TextBlock Text="目前未鎖定，加到鎖定" />
+                                                </StackPanel>
+                                            </ToolTip>
+                                        </FrameworkElement.ToolTip>
+                                    </Button>
+                                    <Button Grid.Column="0" Name="ACardUnLock" Click="ACardUnLockClick" BorderThickness="0" Margin="20,0,0,0" Height="22" Width="22" Visibility="Visible">
+                                        <Control.Background>
+                                            <ImageBrush ImageSource="/res/png/icon_lock.png" />
+                                        </Control.Background>
+                                        <FrameworkElement.ToolTip>
+                                            <ToolTip>
+                                                <StackPanel>
+                                                    <TextBlock Text="目前已鎖定，取消鎖定" />
+                                                </StackPanel>
+                                            </ToolTip>
+                                        </FrameworkElement.ToolTip>
+                                    </Button>
+                                    <Image Grid.Column="1" Name="CardJobPNG" Source="/res/category/icon_Job_non.png" Height="20" Width="20" Margin="10,0,0,0"/>
+                                    <Label Grid.Column="2" Content="選擇角色名:" Padding="0,5,5,5" Margin="10,0,0,0"/>
+                                    <TextBlock Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="textCardName" Margin="10,0,10,0"/>
+                                </Grid>
+                            </StackPanel>
+                            <Grid Grid.ColumnSpan = "3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Orientation="Horizontal" Margin="0,5,0,0" DockPanel.Dock="Top">
+                                    <Label Content="等級:" Padding="0,5,5,5" Margin="10,0,0,0"/>
+                                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="textCardLV" Margin="0,0,10,0"/>
+                                </StackPanel>
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="0,5,0,0" DockPanel.Dock="Top">
+                                    <Label Content="已突破:" Padding="0,5,5,5" Margin="10,0,0,0"/>
+                                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="textCardExceed" Margin="0,0,10,0"/>
+                                </StackPanel>
+                                <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="0,5,0,0" DockPanel.Dock="Top">
+                                    <Label Content="已解鎖EX:" Padding="0,5,5,5" Margin="10,0,0,0"/>
+                                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="textCardEX" Margin="0,0,10,0"/>
+                                </StackPanel>
+                                <StackPanel Grid.Column="3" Orientation="Horizontal" Margin="0,5,0,0" DockPanel.Dock="Top">
+                                    <Label Content="轉職:" Padding="0,5,5,5" Margin="10,0,0,0"/>
+                                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="textCardTransfer" Margin="0,0,10,0"/>
+                                </StackPanel>
+                            </Grid>
+                            <Grid Grid.ColumnSpan = "3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Button Grid.Column="0" x:Name="ACardLevelUp150" Click="ACardLevelUp150Click" Height="25" Style="{DynamicResource MaterialDesignRaisedButton}" Content="LV150"  Margin="10,20,10,0" >
+                                    <Button.ToolTip>
+                                        <ToolTip>
+                                            <StackPanel>
+                                                <TextBlock Text="將未達LV150的角色升至滿級" />
+                                            </StackPanel>
+                                        </ToolTip>
+                                    </Button.ToolTip>
+                                </Button>
+                                <Button Grid.Column="1" x:Name="ACardExceed" Click="ACardExceedClick" Height="25" Style="{DynamicResource MaterialDesignRaisedButton}" Content="8突" Margin="10,20,10,0"  >
+                                    <Button.ToolTip>
+                                        <ToolTip>
+                                            <StackPanel>
+                                                <TextBlock Text="自動突破界限" />
+                                            </StackPanel>
+                                        </ToolTip>
+                                    </Button.ToolTip>
+                                </Button>
+                                <Button Grid.Column="2" x:Name="ACardUnlockEX" Click="ACardUnlockEXClick" HorizontalAlignment="Stretch" Height="25" Style="{DynamicResource MaterialDesignRaisedButton}" Content="EX星盤" Margin="10,20,10,0">
+                                    <Button.ToolTip>
+                                        <ToolTip>
+                                            <StackPanel>
+                                                <TextBlock Text="解鎖該角色EX星盤" />
+                                            </StackPanel>
+                                        </ToolTip>
+                                    </Button.ToolTip>
+                                </Button>
+                                <Button Grid.Column="3" x:Name="ACardTransfer" Click="ACardTransferClick" HorizontalAlignment="Stretch" Height="25" Style="{DynamicResource MaterialDesignRaisedButton}" Content="轉職" Margin="10,20,10,0" >
+                                    <Button.ToolTip>
+                                        <ToolTip>
+                                            <StackPanel>
+                                                <TextBlock Text="自動領取轉職珠和魂石,並轉職未轉職之該角色" />
+                                            </StackPanel>
+                                        </ToolTip>
+                                    </Button.ToolTip>
+                                </Button>
+                            </Grid>
+                        </StackPanel>
+
+
+                        <TextBox Grid.Row="2" VerticalScrollBarVisibility="Auto" x:Name="ItemCardterminal" BorderThickness="1" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Stretch" Margin="10,5,10,10" TextWrapping="Wrap" TextChanged="terminal_TextChanged">
+                            <TextBox.Style>
+                                <Style TargetType="{x:Type TextBox}">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsFocused" Value="true"/>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBox.Style>
+                        </TextBox>
+                        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,20">
+                            <Button x:Name="ItemCardbtnSelect" Click="ItemCardBtnSelectClick" Height="33" Width="80"  Style="{DynamicResource MaterialDesignRaisedButton}" VerticalAlignment="Bottom" Content="選擇" Margin="100,0,0,0"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid Grid.Row="1" x:Name="weaponPanel2" Visibility="Hidden">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="200"/>
+                            <RowDefinition/>
+                            <RowDefinition Height="60"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Orientation="Horizontal" Margin="10,0,10,0" VerticalAlignment="Center" Height="38">
+                            <Button Content="武器庫" x:Name="weaponHouseBtn" Height="25" Width="80" Background="DodgerBlue" BorderBrush="{x:Null}" Foreground="White" Click="weaponHouseBtnClick" IsEnabled="False"/>
+                            <Button Content="保管庫" x:Name="wareHouseBtn" Height="25" Width="80" Background="SkyBlue" BorderBrush="{x:Null}" Foreground="White" Margin="3,0,0,0" Click="wareHouseBtnClick"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="1" >
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <TextBox x:Name="Itemweaponsearch" Grid.Column="0" Margin="10,10,10,10" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" PreviewTextInput="OnPreviewTextInput1" TextChanged="OnTextChanged1">
+                                    <TextBox.Style>
+                                        <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
+                                            <Style.Resources>
+                                                <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                                    <VisualBrush.Visual>
+                                                        <Label Content="搜尋" Foreground="Gray" />
+                                                    </VisualBrush.Visual>
+                                                </VisualBrush>
+                                            </Style.Resources>
+                                            <Style.Triggers>
+                                                <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                                    <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                                </Trigger>
+                                                <Trigger Property="Text" Value="{x:Null}">
+                                                    <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                                </Trigger>
+                                                <Trigger Property="IsKeyboardFocused" Value="True">
+                                                    <Setter Property="Background" Value="LightBlue" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBox.Style>
+                                </TextBox>
+                                <ComboBox Grid.Column="1" x:Name="Itemweapontroop" Margin="0,10,10,10" ItemsSource="{Binding cardsView1}" IsTextSearchEnabled="False" IsEditable="True" IsReadOnly="True" DisplayMemberPath="cardInfo"/>
+                            </Grid>
+
+                            <Grid Grid.ColumnSpan = "3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Button Grid.Column="0" Name="AWeaponLock" Click="AWeaponLockClick" HorizontalAlignment="Left" BorderThickness="0" Margin="10,0,0,0" Height="20" Width="20" Visibility="Visible">
+                                    <Control.Background>
+                                        <ImageBrush ImageSource="/res/png/icon_unlock.png" />
+                                    </Control.Background>
+                                    <FrameworkElement.ToolTip>
+                                        <ToolTip>
+                                            <StackPanel>
+                                                <TextBlock Text="目前未鎖定，加到鎖定" />
+                                            </StackPanel>
+                                        </ToolTip>
+                                    </FrameworkElement.ToolTip>
+                                </Button>
+                                <Button Grid.Column="0" Name="AWeaponUnLock" Click="AWeaponUnLockClick" HorizontalAlignment="Left" BorderThickness="0" Margin="10,0,0,0" Height="22" Width="22" Visibility="Visible">
+                                    <Control.Background>
+                                        <ImageBrush ImageSource="/res/png/icon_lock.png" />
+                                    </Control.Background>
+                                    <FrameworkElement.ToolTip>
+                                        <ToolTip>
+                                            <StackPanel>
+                                                <TextBlock Text="目前已鎖定，取消鎖定" />
+                                            </StackPanel>
+                                        </ToolTip>
+                                    </FrameworkElement.ToolTip>
+                                </Button>
+                                <Image Grid.Column="0" Name="WeaponJobPNG" Source="/res/category/icon_Job_non.png" HorizontalAlignment="Left" Height="20" Width="20" Margin="40,0,0,0"/>
+                                <Label Grid.Column="1" Content="武器名: " Padding="0,5,5,5" Margin="-20,0,0,0"/>
+                                <TextBlock Grid.Column="2" x:Name="textWeaponName" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="-20,0,10,0"/>
+                                <Label Grid.Column="3" Content="ID:" Padding="0,5,5,5" Margin="10,0,0,0"/>
+                                <TextBlock Grid.Column="4" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="textWeaponID" Margin="0,0,10,0"/>
+                            </Grid>
+                            <Grid Grid.ColumnSpan = "3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="3,0,0,0" DockPanel.Dock="Top">
+                                    <Label Content="稀有度:" Padding="0,5,5,5" Margin="10,0,0,0"/>
+                                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="textWeaponRar" Margin="0,0,10,0"/>
+                                </StackPanel>
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="0,0,0,0" DockPanel.Dock="Top">
+                                    <Label Content="可強化:" Padding="0,5,5,5" Margin="10,0,0,0"/>
+                                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="textWeaponLV" Margin="0,0,10,0"/>
+                                </StackPanel>
+                                <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="0,0,0,0" DockPanel.Dock="Top">
+                                    <Label Content="合成值:" Padding="0,5,5,5" Margin="10,0,0,0"/>
+                                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="textWeaponExp" Margin="0,0,10,0"/>
+                                </StackPanel>
+                                <StackPanel Grid.Column="3" Orientation="Horizontal" Margin="0,0,0,0" DockPanel.Dock="Top">
+                                    <Label Content="儲存:" Padding="0,5,5,5" Margin="10,0,0,0"/>
+                                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="textWeaponLoc" Margin="0,0,10,0"/>
+                                </StackPanel>
+                            </Grid>
+                            <Grid Grid.ColumnSpan = "3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Button Grid.Column="0" x:Name="AWeaponStorage" Click="AWeaponStorageClick" Height="25" Style="{DynamicResource MaterialDesignRaisedButton}" Content="放入保管庫" Margin="10,15,10,0"  Visibility="Visible"/>
+                                <Button Grid.Column="0" x:Name="AWeaponUnstorage" Click="AWeaponUnstorageClick" Height="25" Style="{DynamicResource MaterialDesignRaisedButton}" Content="保管庫取出" Margin="10,15,10,0"  Visibility="Hidden"/>
+                                <Button Grid.Column="1" x:Name="AWeaponSkill" Click="AWeaponSkillClick" HorizontalAlignment="Stretch" Height="25" Style="{DynamicResource MaterialDesignRaisedButton}" Content="技能變換" Margin="10,15,10,0"/>
+                                <Button Grid.Column="2" x:Name="WeaponSkillWindowBtn" Click="WeaponSkillWindowBtnClick" Height="25" Style="{DynamicResource MaterialDesignRaisedButton}" Content="武器技能面板"  Margin="10,15,10,0" />
+                            </Grid>
+                        </StackPanel>
+                        <TextBox Grid.Row="1" VerticalScrollBarVisibility="Auto" x:Name="ItemWeaponterminal" BorderThickness="1" IsReadOnly="True" Margin="10,163,10,10" TextWrapping="Wrap" TextChanged="terminal_TextChanged" Grid.RowSpan="2">
+                            <TextBox.Style>
+                                <Style TargetType="{x:Type TextBox}">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsFocused" Value="true"/>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBox.Style>
+                        </TextBox>
+                        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,20">
+                            <Button x:Name="ItemWeaponbtnSelect" Click="ItemWeaponBtnSelectClick" Height="33" Width="80"  Style="{DynamicResource MaterialDesignRaisedButton}" VerticalAlignment="Bottom" Content="選擇" Margin="100,0,0,0" />
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="1" x:Name="itemPanel2" Visibility="Hidden">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="200"/>
+                            <RowDefinition/>
+                            <RowDefinition Height="60"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="1">
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <TextBox x:Name="Itemitemsearch" Grid.Column="0" Margin="10,10,10,10" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" PreviewTextInput="OnPreviewTextInput1" TextChanged="OnTextChanged1">
+                                    <TextBox.Style>
+                                        <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
+                                            <Style.Resources>
+                                                <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                                    <VisualBrush.Visual>
+                                                        <Label Content="搜尋" Foreground="Gray" />
+                                                    </VisualBrush.Visual>
+                                                </VisualBrush>
+                                            </Style.Resources>
+                                            <Style.Triggers>
+                                                <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                                    <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                                </Trigger>
+                                                <Trigger Property="Text" Value="{x:Null}">
+                                                    <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                                </Trigger>
+                                                <Trigger Property="IsKeyboardFocused" Value="True">
+                                                    <Setter Property="Background" Value="LightBlue" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBox.Style>
+                                </TextBox>
+                                <ComboBox Grid.Column="1" x:Name="Itemitemtroop" Margin="0,10,10,10" ItemsSource="{Binding cardsView1}" IsTextSearchEnabled="False" IsEditable="True" IsReadOnly="True" DisplayMemberPath="cardInfo"/>
+                            </Grid>
+
+                            <StackPanel Orientation="Horizontal" Margin="0,5,0,0" DockPanel.Dock="Top">
+                                <Label Content="符文名:" Padding="0,5,5,5" Margin="10,0,0,0"/>
+                                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="textItemName" Margin="0,0,10,0"/>
+                            </StackPanel>
+                            <Grid Grid.ColumnSpan = "3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Orientation="Horizontal" Margin="0,5,0,0" DockPanel.Dock="Top">
+                                    <Label Content="ID:" Padding="0,5,5,5" Margin="10,0,0,0"/>
+                                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="textItemID" Margin="0,0,10,0"/>
+                                </StackPanel>
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="0,5,0,0" DockPanel.Dock="Top">
+                                    <Label Content="數量:" Padding="0,5,5,5" Margin="10,0,0,0"/>
+                                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="textItemNum" Margin="0,0,10,0"/>
+                                </StackPanel>
+                                <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="0,5,0,0" DockPanel.Dock="Top">
+                                    <Label Content="可使用:" Padding="0,5,5,5" Margin="10,0,0,0"/>
+                                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="textItemUse" Margin="0,0,10,0"/>
+                                </StackPanel>
+                            </Grid>
+                            <Grid Grid.ColumnSpan = "3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Button Grid.Column="0" x:Name="AItemUse" Click="AItemUseClick" Height="25" Style="{DynamicResource MaterialDesignRaisedButton}" Content="使用"  Margin="10,10,10,0" />
+                            </Grid>
+                        </StackPanel>
+                        <TextBox Grid.Row="1" VerticalScrollBarVisibility="Auto" x:Name="ItemItemterminal" BorderThickness="1" IsReadOnly="True" Margin="10,173,10,10" TextWrapping="Wrap" TextChanged="terminal_TextChanged" Grid.RowSpan="2">
+                            <TextBox.Style>
+                                <Style TargetType="{x:Type TextBox}">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsFocused" Value="true"/>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBox.Style>
+                        </TextBox>
+                        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,20">
+                            <Button x:Name="ItemItembtnSelect" Click="ItemItemBtnSelectClick" Height="33" Width="80"  Style="{DynamicResource MaterialDesignRaisedButton}" VerticalAlignment="Bottom" Content="選擇" Margin="100,0,0,0"/>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="1" x:Name="accessoryPanel2" Visibility="Hidden">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="200"/>
+                            <RowDefinition/>
+                            <RowDefinition Height="60"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Orientation="Horizontal" Margin="10,0,10,0" VerticalAlignment="Center" Height="38">
+                            <Button Content="武器庫" x:Name="accessoryweaponHouseBtn" Height="25" Width="80" Background="DodgerBlue" BorderBrush="{x:Null}" Foreground="White" Click="accessoryweaponHouseBtnClick" IsEnabled="False"/>
+                            <Button Content="保管庫" x:Name="accessorywareHouseBtn" Height="25" Width="80" Background="SkyBlue" BorderBrush="{x:Null}" Foreground="White" Margin="3,0,0,0" Click="accessorywareHouseBtnClick"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="1">
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <TextBox x:Name="Itemaccessorysearch" Grid.Column="0" Margin="10,10,10,10" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" PreviewTextInput="OnPreviewTextInput1" TextChanged="OnTextChanged1">
+                                    <TextBox.Style>
+                                        <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
+                                            <Style.Resources>
+                                                <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                                    <VisualBrush.Visual>
+                                                        <Label Content="搜尋" Foreground="Gray" />
+                                                    </VisualBrush.Visual>
+                                                </VisualBrush>
+                                            </Style.Resources>
+                                            <Style.Triggers>
+                                                <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                                    <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                                </Trigger>
+                                                <Trigger Property="Text" Value="{x:Null}">
+                                                    <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                                </Trigger>
+                                                <Trigger Property="IsKeyboardFocused" Value="True">
+                                                    <Setter Property="Background" Value="LightBlue" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBox.Style>
+                                </TextBox>
+                                <ComboBox Grid.Column="1" x:Name="Itemaccessorytroop" Margin="0,10,10,10" ItemsSource="{Binding cardsView1}" IsTextSearchEnabled="False" IsEditable="True" IsReadOnly="True" DisplayMemberPath="cardInfo"/>
+                            </Grid>
+
+                            <Grid Grid.ColumnSpan = "3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Button Grid.Column="0" Name="AAccessoryLock" Click="AAccessoryLockClick" BorderThickness="0" Margin="-70,0,0,0" Height="20" Width="20" Visibility="Hidden">
+                                    <Control.Background>
+                                        <ImageBrush ImageSource="/res/png/icon_unlock.png" />
+                                    </Control.Background>
+                                    <FrameworkElement.ToolTip>
+                                        <ToolTip>
+                                            <StackPanel>
+                                                <TextBlock Text="目前未鎖定，加到鎖定" />
+                                            </StackPanel>
+                                        </ToolTip>
+                                    </FrameworkElement.ToolTip>
+                                </Button>
+                                <Button Grid.Column="0" Name="AAccessoryUnLock" Click="AAccessoryUnLockClick" BorderThickness="0" Margin="-70,0,0,0" Height="20" Width="20" Visibility="Visible">
+                                    <Control.Background>
+                                        <ImageBrush ImageSource="/res/png/icon_lock.png" />
+                                    </Control.Background>
+                                    <FrameworkElement.ToolTip>
+                                        <ToolTip>
+                                            <StackPanel>
+                                                <TextBlock Text="目前已鎖定，取消鎖定" />
+                                            </StackPanel>
+                                        </ToolTip>
+                                    </FrameworkElement.ToolTip>
+                                </Button>
+                                <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="40,0,0,0" DockPanel.Dock="Top" Grid.ColumnSpan="2">
+                                    <Label Content="飾品名: " Padding="0,5,5,5" Margin="10,0,0,0"/>
+                                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="textAccessoryName" Margin="0,0,10,0"/>
+                                </StackPanel>
+                                <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="-20,0,0,0" DockPanel.Dock="Top" Grid.ColumnSpan="2">
+                                    <Label Content="ID:" Padding="0,5,5,5" Margin="10,0,0,0"/>
+                                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="textAccessoryID" Margin="0,0,0,0"/>
+                                </StackPanel>
+                                <StackPanel Grid.Column="3" Orientation="Horizontal" Margin="-20,0,0,0" DockPanel.Dock="Top">
+                                    <Label Content="稀有度:" Padding="0,5,5,5" Margin="10,0,0,0"/>
+                                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="textAccessoryRar" Margin="0,0,10,0"/>
+                                </StackPanel>
+                            </Grid>
+                            <Grid>
+                                <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="10,5,3,0" DockPanel.Dock="Top">
+                                    <Label Content="技能1: " Padding="0,5,5,5" Margin="10,0,0,0"/>
+                                    <Image x:Name="AccessorySkill1PNG" Source="/res/icon_accessory_non.png" Height="22" Width="22" Margin="0,0,0,0"/>
+                                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="textAccessorySkill1" Margin="0,0,0,0"/>
+                                </StackPanel>
+                            </Grid>
+                            <Grid>
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="10,5,3,0" DockPanel.Dock="Top">
+                                    <Label Content="技能2: " Padding="0,5,5,5" Margin="10,0,0,0"/>
+                                    <Image x:Name="AccessorySkill2PNG" Source="/res/icon_accessory_non.png" Height="22" Width="22" Margin="0,0,0,0"/>
+                                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="textAccessorySkill2" Margin="0,0,0,0"/>
+                                </StackPanel>
+                            </Grid>
+                            <Grid>
+                                <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="10,5,3,0" DockPanel.Dock="Top">
+                                    <Label Content="技能3: " Padding="0,5,5,5" Margin="10,0,0,0"/>
+                                    <Image x:Name="AccessorySkill3PNG" Source="/res/icon_accessory_non.png" Height="22" Width="22" Margin="0,0,0,0"/>
+                                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="textAccessorySkill3" Margin="0,0,0,0"/>
+                                </StackPanel>
+                            </Grid>
+                            <Grid Grid.ColumnSpan = "3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="10,5,0,0" DockPanel.Dock="Top">
+                                    <Button Grid.Column="0" x:Name="AAccessorySell" Click="AAccessorySellClick" Height="25" Style="{DynamicResource MaterialDesignRaisedButton}" Content="變賣"  Margin="0,0,0,0" />
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                        <TextBox Grid.Row="2" VerticalScrollBarVisibility="Auto" x:Name="ItemAccessoryterminal" BorderThickness="1" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Stretch" Margin="10,5,10,10" TextWrapping="Wrap" TextChanged="terminal_TextChanged">
+                            <TextBox.Style>
+                                <Style TargetType="{x:Type TextBox}">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsFocused" Value="true"/>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBox.Style>
+                        </TextBox>
+                        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,20">
+                            <Button x:Name="ItemAccessorybtnSelect" Click="ItemAccessoryBtnSelectClick" Height="33" Width="80"  Style="{DynamicResource MaterialDesignRaisedButton}" VerticalAlignment="Bottom" Content="選擇" Margin="100,0,0,0"/>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="1" x:Name="fragmentPanel2" Visibility="Hidden">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="200"/>
+                            <RowDefinition/>
+                            <RowDefinition Height="60"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="1">
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <TextBox x:Name="Itemfragmentsearch" Grid.Column="0" Margin="10,10,10,10" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" PreviewTextInput="OnPreviewTextInput1" TextChanged="OnTextChanged1">
+                                    <TextBox.Style>
+                                        <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
+                                            <Style.Resources>
+                                                <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                                    <VisualBrush.Visual>
+                                                        <Label Content="搜尋" Foreground="Gray" />
+                                                    </VisualBrush.Visual>
+                                                </VisualBrush>
+                                            </Style.Resources>
+                                            <Style.Triggers>
+                                                <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                                    <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                                </Trigger>
+                                                <Trigger Property="Text" Value="{x:Null}">
+                                                    <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                                </Trigger>
+                                                <Trigger Property="IsKeyboardFocused" Value="True">
+                                                    <Setter Property="Background" Value="LightBlue" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBox.Style>
+                                </TextBox>
+                                <ComboBox Grid.Column="1" x:Name="Itemfragmenttroop" Margin="0,10,10,10" ItemsSource="{Binding cardsView1}" IsTextSearchEnabled="False" IsEditable="True" IsReadOnly="True" DisplayMemberPath="cardInfo"/>
+                            </Grid>
+
+                            <Grid Grid.ColumnSpan = "3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Button Grid.Column="0" Name="AFragmentLock" Click="AFragmentLockClick" BorderThickness="0" Margin="-70,0,0,0" Height="20" Width="20" Visibility="Hidden">
+                                    <Control.Background>
+                                        <ImageBrush ImageSource="/res/png/icon_unlock.png" />
+                                    </Control.Background>
+                                    <FrameworkElement.ToolTip>
+                                        <ToolTip>
+                                            <StackPanel>
+                                                <TextBlock Text="目前未鎖定，加到鎖定" />
+                                            </StackPanel>
+                                        </ToolTip>
+                                    </FrameworkElement.ToolTip>
+                                </Button>
+                                <Button Grid.Column="0" Name="AFragmentUnLock" Click="AFragmentUnLockClick" BorderThickness="0" Margin="-70,0,0,0" Height="20" Width="20" Visibility="Visible">
+                                    <Control.Background>
+                                        <ImageBrush ImageSource="/res/png/icon_lock.png" />
+                                    </Control.Background>
+                                    <FrameworkElement.ToolTip>
+                                        <ToolTip>
+                                            <StackPanel>
+                                                <TextBlock Text="目前已鎖定，取消鎖定" />
+                                            </StackPanel>
+                                        </ToolTip>
+                                    </FrameworkElement.ToolTip>
+                                </Button>
+                                <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="40,0,0,0" DockPanel.Dock="Top" Grid.ColumnSpan="2">
+                                    <Label Content="石板名: " Padding="0,5,5,5" Margin="10,0,0,0"/>
+                                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="textFragmentName" Margin="0,0,10,0"/>
+                                </StackPanel>
+                                <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="-20,0,0,0" DockPanel.Dock="Top" Grid.ColumnSpan="2">
+                                    <Label Content="ID:" Padding="0,5,5,5" Margin="10,0,0,0"/>
+                                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="textFragmentID" Margin="0,0,0,0"/>
+                                </StackPanel>
+                                <StackPanel Grid.Column="3" Orientation="Horizontal" Margin="-20,0,0,0" DockPanel.Dock="Top">
+                                    <Label Content="稀有度:" Padding="0,5,5,5" Margin="10,0,0,0"/>
+                                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="textFragmentRar" Margin="0,0,10,0"/>
+                                </StackPanel>
+                            </Grid>
+                            <Grid>
+                                <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="10,5,3,0" DockPanel.Dock="Top">
+                                    <Label Content="技能: " Padding="0,5,5,5" Margin="10,0,0,0"/>
+                                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="textFragmentSkill" Margin="0,0,0,0"/>
+                                </StackPanel>
+                            </Grid>
+                            <Grid Grid.ColumnSpan = "3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="10,5,0,0" DockPanel.Dock="Top">
+                                    <Button Grid.Column="0" x:Name="AFragmentLevelUp" Click="AFragmentLevelUpClick" Height="25" Style="{DynamicResource MaterialDesignRaisedButton}" Content="升級"  Margin="0,30,0,0" />
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                        <TextBox Grid.Row="2" VerticalScrollBarVisibility="Auto" x:Name="ItemFragmentterminal" BorderThickness="1" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Stretch" Margin="10,-20,10,10" TextWrapping="Wrap" TextChanged="terminal_TextChanged">
+                            <TextBox.Style>
+                                <Style TargetType="{x:Type TextBox}">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsFocused" Value="true"/>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBox.Style>
+                        </TextBox>
+                        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,20">
+                            <Button x:Name="ItemFragmentbtnSelect" Click="ItemFragmentBtnSelectClick" Height="33" Width="80"  Style="{DynamicResource MaterialDesignRaisedButton}" VerticalAlignment="Bottom" Content="選擇" Margin="100,0,0,0"/>
+                        </StackPanel>
+                    </Grid>
+                    <Grid>
+                        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,20">
+                            <Button x:Name="ItembtnRefresh" Click="ItemBtnRefreshClick" Height="33" Width="80"  Style="{DynamicResource MaterialDesignRaisedButton}" VerticalAlignment="Bottom" Content="重整" Margin="-100,0,0,0"/>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </materialDesign:Card>
+        </Grid>
+    </Grid>
+</UserControl>
