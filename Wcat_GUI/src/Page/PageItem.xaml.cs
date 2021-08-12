@@ -45,6 +45,7 @@ namespace Wcat_GUI
     }
     public partial class PageItem : UserControl
     {
+        private Thread AllItemThread;
         public Dictionary<string, List<string>> ChangedDict = new Dictionary<string, List<string>>();
         public ICollectionView cardsView1 { get; set; }
         public ObservableCollection<DeckShareData.Card> cards { get; set; }
@@ -81,11 +82,13 @@ namespace Wcat_GUI
             ItemAccessoryHandler = new ExceptionHandler(ItemAccessoryWriter);
             ItemFragmentWriter = new CustomWriter(ItemFragmentterminal);
             ItemFragmentHandler = new ExceptionHandler(ItemFragmentWriter);
+
             Buffers.pageItemCardMsgs.CollectionChanged += OnCollectionChanged_Card;
             Buffers.pageItemWeaponMsgs.CollectionChanged += OnCollectionChanged_Weapon;
             Buffers.pageItemItemMsgs.CollectionChanged += OnCollectionChanged_Item;
             Buffers.pageItemAccessoryMsgs.CollectionChanged += OnCollectionChanged_Accessory;
             Buffers.pageItemFragmentMsgs.CollectionChanged += OnCollectionChanged_Fragment;
+
             cardsView1 = new CollectionViewSource() { Source = cards }.View;
         }
         public void RestoreItemSetting()
@@ -351,7 +354,34 @@ namespace Wcat_GUI
         }
         private void ItemBtnRefreshClick(object sender, EventArgs e)
         {
-            AllItemAction.SetAllItemList();
+            ItemCardWriter.WriteLine("重置中...");
+            ItemWeaponWriter.WriteLine("重置中...");
+            ItemItemWriter.WriteLine("重置中...");
+            ItemAccessoryWriter.WriteLine("重置中...");
+            ItemFragmentWriter.WriteLine("重置中...");
+            /**************************************/
+            ItembtnRefresh.IsEnabled = false;
+            /**************************************/
+
+            AllItemThread = new Thread(() =>
+            {
+                ItemFragmentHandler.GlobalTryCatch(() =>
+                {
+                    AllItemAction.SetAllItemList();
+                });
+
+                Dispatcher.Invoke(() =>
+                {
+                    ItemCardWriter.WriteLine("重置完成");
+                    ItemWeaponWriter.WriteLine("重置完成");
+                    ItemItemWriter.WriteLine("重置完成");
+                    ItemAccessoryWriter.WriteLine("重置完成");
+                    ItemFragmentWriter.WriteLine("重置完成");
+                    ItembtnRefresh.IsEnabled = true;
+                });
+
+            });
+            AllItemThread.Start();
         }
     }
 }

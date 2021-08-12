@@ -27,10 +27,13 @@ namespace Wcat_GUI
         private DebugWindow debugWindow;
         public static WeaponEnhanceWindow weaponEnhanceWindow;
 
+        public static WeaponSkillWindow weaponSkillWindow;
+
         public MainWindow()
         {
             debugWindow = new DebugWindow();
             weaponEnhanceWindow = new WeaponEnhanceWindow();
+            weaponSkillWindow = new WeaponSkillWindow();
             Console.SetOut(new CustomWriter(debugWindow.terminal));
 
             InitializeComponent();

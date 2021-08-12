@@ -13,6 +13,7 @@ using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using Wcat;
+using Wcat.Action;
 using Wcat.PageAction;
 using Wcat.Stream;
 using Wcat_GUI.Exceptions;
@@ -28,6 +29,7 @@ namespace Wcat_GUI
     /// </summary>
     public partial class PageItem
     {
+        private Thread ItemAccessoryThread;
         private class ItemAccessorySetting
         {
             public bool? AccessoryFilterStar1Checked;
@@ -129,7 +131,30 @@ namespace Wcat_GUI
 
         private void ItemAccessoryBtnSelectClick(object sender, RoutedEventArgs e)
         {
+            ItemAccessoryWriter.WriteLine("得到技能ID...");
+            /**************************************/
+            ItemAccessorybtnSelect.IsEnabled = false;
+            /**************************************/
 
+            ItemAccessoryThread = new Thread(() =>
+            {
+                ItemAccessoryHandler.GlobalTryCatch(() =>
+                {
+                    if (AllItemAction.ItemWeapons == null)
+                    {
+                        AllItemAction.SetAllItemList();
+                    }
+                    WeaponAction.GetAllWeaponSkill();
+                });
+
+                Dispatcher.Invoke(() =>
+                {
+                    ItemAccessoryWriter.WriteLine("完成");
+                    ItemAccessorybtnSelect.IsEnabled = true;
+                });
+
+            });
+            ItemAccessoryThread.Start();
         }
     }
 }

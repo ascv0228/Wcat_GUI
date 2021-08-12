@@ -322,8 +322,9 @@ namespace Wcat_GUI
             }
             ItemWeaponWriter.WriteLine("武器交換結束");*/
         }
-        private void WeaponEnhanceClick(object sender, EventArgs e)
+        private void WeaponSkillExchangeClick(object sender, EventArgs e)
         {
+            WeaponAction.GetWeapon("27196924");
         }
         private void ItemWeaponBtnSelectClick(object sender, EventArgs e)
         {
@@ -374,10 +375,83 @@ namespace Wcat_GUI
 
         private void WeaponSkillWindowBtnClick(object sender, EventArgs e)
         {
+            MainWindow.weaponSkillWindow.Show();
+            /*
+            string uwId = "27196660";
+            int csId1 = 30000032;
+            int csId2 = 30000033;
+            int csId3 = 30000132;
+            ItemWeaponWriter.WriteLine("交換技能...");
+            WeaponSkillWindowBtn.IsEnabled = false;
+
+            ItemWeaponThread = new Thread(() =>
+            {
+                ItemWeaponHandler.GlobalTryCatch(() =>
+                {
+                    WeaponAction.ExecWeaponSkill(uwId, csId1, csId2, csId3,true);
+                });
+
+                Dispatcher.Invoke(() =>
+                {
+                    ItemWeaponWriter.WriteLine("交換技能 完成");
+                    WeaponSkillWindowBtn.IsEnabled = true;
+                });
+
+            });
+            ItemWeaponThread.Start();
+            */
         }
         private void ItemWeaponBtnSelectClick(object sender, RoutedEventArgs e)
         {
+            ItemWeaponWriter.WriteLine("得到技能ID...");
+            ItemWeaponbtnSelect.IsEnabled = false;
 
+            ItemWeaponThread = new Thread(() =>
+            {
+                ItemWeaponHandler.GlobalTryCatch(() =>
+                {
+                    if (AllItemAction.ItemWeapons == null)
+                    {
+                        AllItemAction.SetAllItemList();
+                    }
+                    WeaponAction.GetAllWeaponSkill();
+                });
+
+                Dispatcher.Invoke(() =>
+                {
+                    ItemWeaponWriter.WriteLine("完成");
+                    ItemWeaponbtnSelect.IsEnabled = true;
+                });
+
+            });
+            ItemWeaponThread.Start();
         }
+        /*
+         
+        {
+            ItemWeaponWriter.WriteLine("得到技能ID...");
+            ItemWeaponbtnSelect.IsEnabled = false;
+
+            ItemWeaponThread = new Thread(() =>
+            {
+            ItemWeaponHandler.GlobalTryCatch(() =>
+            {
+                if (AllItemAction.ItemWeapons == null)
+                {
+                    AllItemAction.SetAllItemList();
+                }
+                WeaponAction.GetAllWeaponSkill();
+            });
+
+            Dispatcher.Invoke(() =>
+            {
+                ItemWeaponWriter.WriteLine("完成");
+                ItemWeaponbtnSelect.IsEnabled = true;
+            });
+
+        });
+            ItemWeaponThread.Start();
+        }
+    */
     }
 }

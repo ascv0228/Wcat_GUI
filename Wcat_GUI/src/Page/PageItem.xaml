@@ -280,7 +280,7 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,5,0,20" DockPanel.Dock="Top" HorizontalAlignment="Center">
                             <Button x:Name="WeaponExchange" Click="WeaponExchangeClick" Height="33" Width="120"  Style="{DynamicResource MaterialDesignRaisedButton}" VerticalAlignment="Bottom" Content="武器交換" Margin="10,0,0,0"/>
-                            <Button x:Name="WeaponSkillExchange" Click="WeaponEnhanceClick" Height="33" Width="120"  Style="{DynamicResource MaterialDesignRaisedButton}" VerticalAlignment="Bottom" Content="技能變換" Margin="10,0,0,0"/>
+                            <Button x:Name="WeaponSkillExchange" Click="WeaponSkillExchangeClick" Height="33" Width="120"  Style="{DynamicResource MaterialDesignRaisedButton}" VerticalAlignment="Bottom" Content="技能變換" Margin="10,0,0,0"/>
                         </StackPanel>
 
                     </Grid>

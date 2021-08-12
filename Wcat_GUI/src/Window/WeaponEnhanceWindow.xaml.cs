@@ -19,7 +19,7 @@ namespace Wcat_GUI
         {
             InitializeComponent();
 
-            Buffers.pageWeaponEnhanceMsgs.CollectionChanged += OnCollectionChanged;
+            Buffers.WindowWeaponEnhanceMsgs.CollectionChanged += OnCollectionChanged;
         }
 
         private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)

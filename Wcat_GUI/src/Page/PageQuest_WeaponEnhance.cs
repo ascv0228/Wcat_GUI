@@ -39,7 +39,7 @@ namespace Wcat_GUI
             }
         }
 
-        private void WeaponEhanceBtnEndClick(object sender, RoutedEventArgs e)
+        private void WeaponEnhanceBtnEndClick(object sender, RoutedEventArgs e)
         {
             WeaponEnhanceThread?.Interrupt();
         }
@@ -99,7 +99,7 @@ namespace Wcat_GUI
             {
                 WeaponEnhanceWriter.WriteLine($"目標 => 攻擊:{target.atk}, 防禦:{target.def}, 會心:{target.hit} 屬傷:{target.elem}");
             }
-
+            var AutoRecoveryChecked = WeaponEnhanceAutoRecovery.IsChecked ?? false;
 
             WeaponEnhanceThread = new Thread(() =>
             {
@@ -161,15 +161,8 @@ namespace Wcat_GUI
                             status = false;
                             try
                             {
-                                WeaponEnhanceWriter.WriteLine($"第{++counter}次淬鍊\n");
+                                WeaponEnhanceWriter.WriteLine($"第{++counter}次淬鍊");
 
-                                pointMap.TryGetValue(quest.locationId, out var actionPoint);
-                                if (actionPoint == 0)
-                                {
-                                    WeaponEnhanceAction.RecoveryItem(quest.locationId, quest.hard, 6, WeaponEnhanceAutoRecovery.IsChecked??false);
-                                    pointMap[quest.locationId] = 6;
-                                }
-                                --pointMap[quest.locationId];
                                 UserData.selectedWeapon = infos;
                                 status = WeaponEnhanceAction.SendWeaponEnhanceQuest(quest, injectInfo, targets);
                             }
@@ -184,6 +177,20 @@ namespace Wcat_GUI
                             catch (ExceptionsData.GenerateException ex)
                             {
                                 WeaponEnhanceWriter.WriteLine($"淬鍊{infos.name}時取得關卡失敗: {ex.Message}");
+                                if(ex.Message == "ERR_UNKNOWN")
+                                {
+                                    if(AutoRecoveryChecked)
+                                    {
+                                        if (WeaponEnhanceAction.RecoveryItem(quest.locationId, quest.hard, 6, true))
+                                        {
+                                            WeaponEnhanceWriter.WriteLine($"符文驅動器補充完成");
+                                        }
+                                    }
+                                    else
+                                    {
+                                        WeaponEnhanceEnd();
+                                    }
+                                }
                             }
                             catch (ExceptionsData.CompleteException ex)
                             {
@@ -211,9 +218,15 @@ namespace Wcat_GUI
             WeaponEnhanceThread.Start();
         }
 
-        private void WeaponEnhanceBtnEndClick(object sender, RoutedEventArgs e)
+
+        private void WeaponEnhanceEnd()
         {
             WeaponEnhanceThread?.Interrupt();
+        }
+
+        private void WeaponEnhanceRecoveryItem()
+        {
+
         }
 
     }
