@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System;
 
 namespace Wcat_GUI
 {
@@ -16,6 +17,10 @@ namespace Wcat_GUI
         {
             e.Cancel = true;
             this.Hide();
+        }
+        public static void DebugWindow_Clear()
+        {
+            Console.Clear();
         }
     }
 }

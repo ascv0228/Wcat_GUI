@@ -16,7 +16,7 @@
                 <StackPanel>
                     <Label Content="武器 uwId :" Padding="4,14,4,4" Margin="10,0,0,0"/>
                     <Grid>
-                        <TextBox x:Name="paramText" Grid.Column="0" Margin="10,0,10,10" Height="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
+                        <TextBox x:Name="uwIdText" Grid.Column="0" Margin="10,0,10,10" Height="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
                             <TextBox.Style>
                                 <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
                                     <Style.Resources>
@@ -39,16 +39,87 @@
                                     </Style.Triggers>
                                 </Style>
                             </TextBox.Style>
-                            <TextBox.ToolTip>
-                                <ToolTip>
-                                    <StackPanel>
-                                        <TextBlock Text="*使用此功能時請勿掃蕩單人關卡*"/>
-                                        <TextBlock Text="*此功能會開啟[自動兌換]*"/>
-                                        <TextBlock Text="參數格式: 攻擊,防禦,會心,屬傷 or 攻擊,防禦,會心,屬傷;攻擊,防禦,會心,屬傷" />
-                                        <TextBlock Text="SS => 8, S => 7, A => 6 ......" />
-                                    </StackPanel>
-                                </ToolTip>
-                            </TextBox.ToolTip>
+                        </TextBox>
+                    </Grid>
+                    <Label Content="武器技能1 Id :" Padding="4,4,4,4" Margin="10,0,0,0"/>
+                    <Grid>
+                        <TextBox x:Name="csId1Text" Grid.Column="0" Margin="10,0,10,10" Height="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
+                            <TextBox.Style>
+                                <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                                    <Style.Resources>
+                                        <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                            <VisualBrush.Visual>
+                                                <Label Content="例: 選填(一串數字)" Foreground="Gray" />
+                                            </VisualBrush.Visual>
+                                        </VisualBrush>
+                                    </Style.Resources>
+                                    <Style.Triggers>
+                                        <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                        </Trigger>
+                                        <Trigger Property="Text" Value="{x:Null}">
+                                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                        </Trigger>
+                                        <Trigger Property="IsKeyboardFocused" Value="True">
+                                            <Setter Property="Background" Value="LightBlue" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBox.Style>
+                        </TextBox>
+                    </Grid>
+                    <Label Content="武器技能2 Id :" Padding="4,4,4,4" Margin="10,0,0,0"/>
+                    <Grid>
+                        <TextBox x:Name="csId2Text" Grid.Column="0" Margin="10,0,10,10" Height="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
+                            <TextBox.Style>
+                                <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                                    <Style.Resources>
+                                        <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                            <VisualBrush.Visual>
+                                                <Label Content="例: 選填(一串數字)" Foreground="Gray" />
+                                            </VisualBrush.Visual>
+                                        </VisualBrush>
+                                    </Style.Resources>
+                                    <Style.Triggers>
+                                        <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                        </Trigger>
+                                        <Trigger Property="Text" Value="{x:Null}">
+                                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                        </Trigger>
+                                        <Trigger Property="IsKeyboardFocused" Value="True">
+                                            <Setter Property="Background" Value="LightBlue" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBox.Style>
+                        </TextBox>
+                    </Grid>
+                    <Label Content="武器技能3 Id :" Padding="4,4,4,4" Margin="10,0,0,0"/>
+                    <Grid>
+                        <TextBox x:Name="csId3Text" Grid.Column="0" Margin="10,0,10,10" Height="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
+                            <TextBox.Style>
+                                <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                                    <Style.Resources>
+                                        <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                            <VisualBrush.Visual>
+                                                <Label Content="例: 選填(一串數字)" Foreground="Gray" />
+                                            </VisualBrush.Visual>
+                                        </VisualBrush>
+                                    </Style.Resources>
+                                    <Style.Triggers>
+                                        <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                        </Trigger>
+                                        <Trigger Property="Text" Value="{x:Null}">
+                                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                        </Trigger>
+                                        <Trigger Property="IsKeyboardFocused" Value="True">
+                                            <Setter Property="Background" Value="LightBlue" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBox.Style>
                         </TextBox>
                     </Grid>
                     <Border BorderBrush="LightGray" BorderThickness="1" Margin="10,10,10,0" />
@@ -60,14 +131,23 @@
                         </Grid.ColumnDefinitions>
                         <CheckBox Grid.Column="0" x:Name="showProcess" Content="顯示過程" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
 
-                        <CheckBox Grid.Column="1" x:Name="autoUpdateTroop_SoloQuest" Content="允許技能鎖未滿" HorizontalAlignment="Left" Margin="10,10,-70,0" VerticalAlignment="Top"/>
+                        <CheckBox Grid.Column="1" x:Name="allowNotMax" Content="允許技能鎖未滿" HorizontalAlignment="Left" Margin="10,10,-70,0" VerticalAlignment="Top"/>
 
                     </Grid>
+                    <Grid Margin="0,30,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" x:Name="autoWeaponLockbtn" Click="AutoWeaponLockBtnClick" Height="30" Width="100"  Style="{DynamicResource MaterialDesignRaisedButton}" VerticalAlignment="Bottom" Content="技能鎖"/>
+                        <Button Grid.Column="1" x:Name="allWeaponSkillbtn" Click="AllWeaponSkillBtnClick" Height="30" Width="100"  Style="{DynamicResource MaterialDesignRaisedButton}" VerticalAlignment="Bottom" Content="武器技能"/>
+                    </Grid>
+
                 </StackPanel>
 
                 <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" DockPanel.Dock="Bottom" Margin="0,160,0,20" Width="170">
-                    <Button x:Name="SoloQuestbtnEnd" Click="SoloQuestBtnEndClick" Height="33" Width="80"  Style="{DynamicResource MaterialDesignRaisedButton}" VerticalAlignment="Bottom" Content="停止" IsEnabled="False"/>
-                    <Button x:Name="SoloQuestbtnStart" Click="SoloQuestBtnStartClick" Height="33" Width="80" Style="{DynamicResource MaterialDesignRaisedButton}" VerticalAlignment="Bottom" Content="開始" Margin="10,0,0,0"/>
+                    <Button x:Name="WeaponSkillbtnEnd" Click="WeaponSkillBtnEndClick" Height="33" Width="80"  Style="{DynamicResource MaterialDesignRaisedButton}" VerticalAlignment="Bottom" Content="停止" IsEnabled="False"/>
+                    <Button x:Name="WeaponSkillbtnStart" Click="WeaponSkillBtnStartClick" Height="33" Width="80" Style="{DynamicResource MaterialDesignRaisedButton}" VerticalAlignment="Bottom" Content="開始" Margin="10,0,0,0"/>
                 </StackPanel>
             </Grid>
         </materialDesign:Card>

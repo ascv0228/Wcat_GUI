@@ -23,7 +23,7 @@ namespace Wcat_GUI
         // private PageBuilding pageBuilding;
         // private PageInjection pageInjection;
         private PageHome pageHome;
-        // private PageTools pageTools;
+        private PageCity pageCity;
         private DebugWindow debugWindow;
         public static WeaponEnhanceWindow weaponEnhanceWindow;
 
@@ -121,12 +121,12 @@ namespace Wcat_GUI
                             {
                                 Header = "禮物盒",
                                 Content = pagePresent = new PagePresent()
-                            });/*
+                            });
                             tab.Items.Add(new TabItem()
                             {
                                 Header = "城鎮",
-                                Content = pageBuilding = new PageBuilding()
-                            });
+                                Content = pageCity = new PageCity()
+                            });/*
                             tab.Items.Add(new TabItem()
                             {
                                 Header = "特殊",

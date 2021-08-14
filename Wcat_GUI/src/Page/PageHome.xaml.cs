@@ -63,7 +63,7 @@ namespace Wcat_GUI
             var tmp = PageHomeAction.GetUserProperties();
             textUserJewel.Text = $"{tmp.jewel}";
             textUserMoney.Text = $"{tmp.gold}";
-            textUserSoul.Text =  $"{tmp.soul}";
+            textUserSoul.Text = $"{tmp.soul}";
         }
         private void UpdateLocalTroopInfo()
         {
@@ -164,6 +164,7 @@ namespace Wcat_GUI
                 {
                     PageHomeAction.StartUpdateDeck();
                     UpdateLocalTroopInfo();
+                    InitUserProperties();
 
 
                     mainWriter.WriteLine("載入資料...");
@@ -182,7 +183,6 @@ namespace Wcat_GUI
                     btnRefresh.IsEnabled = true;
                 });
             }).Start();
-            InitUserProperties();
         }
 
         private void BtnUpdateClick(object sender, EventArgs e)
@@ -209,6 +209,7 @@ namespace Wcat_GUI
                 mainHandler.GlobalTryCatch(() =>
                 {
                     PageHomeAction.StartUpdateTroop(updateCards);
+                    InitUserProperties();
                 });
 
                 Dispatcher.Invoke(() =>
@@ -217,7 +218,6 @@ namespace Wcat_GUI
                     btnRefresh.IsEnabled = true;
                 });
             }).Start();
-            InitUserProperties();
         }
 
 
@@ -387,6 +387,8 @@ namespace Wcat_GUI
             PageItem.ItemTerminals_Clear();
             PagePresent.PresentTerminals_Clear();
             PageQuest.QuestTerminals_Clear();
+            WeaponSkillWindow.WeaponSkillWindowTerminals_Clear();
+            DebugWindow.DebugWindow_Clear();
         }
 
     }

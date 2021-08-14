@@ -224,11 +224,6 @@ namespace Wcat_GUI
             WeaponEnhanceThread?.Interrupt();
         }
 
-        private void WeaponEnhanceRecoveryItem()
-        {
-
-        }
-
     }
 
 }

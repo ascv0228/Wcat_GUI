@@ -27,6 +27,7 @@ namespace Wcat_GUI
             public bool? getAccessoryChecked;
             public bool? getLevelRuneChecked;
             public bool? getWeaponRuneChecked;
+            public bool? getSpecialRuneChecked;
             public bool? getOtherRuneChecked;
             public bool? getTransferBeadChecked;
             public bool? getGemChecked;
@@ -86,6 +87,7 @@ namespace Wcat_GUI
                 getAccessoryChecked = getAccessory.IsChecked,
                 getLevelRuneChecked = getLevelRune.IsChecked,
                 getWeaponRuneChecked = getWeaponRune.IsChecked,
+                getSpecialRuneChecked = getSpecialRune.IsChecked,
                 getOtherRuneChecked = getOtherRune.IsChecked,
                 getTransferBeadChecked = getTransferBead.IsChecked,
                 getGemChecked = getGem.IsChecked,
@@ -123,6 +125,7 @@ namespace Wcat_GUI
                     getAccessory.IsChecked = setting.getAccessoryChecked ?? false;
                     getLevelRune.IsChecked = setting.getLevelRuneChecked ?? false;
                     getWeaponRune.IsChecked = setting.getWeaponRuneChecked ?? false;
+                    getSpecialRune.IsChecked = setting.getSpecialRuneChecked ?? false;
                     getOtherRune.IsChecked = setting.getOtherRuneChecked ?? false;
                     getTransferBead.IsChecked = setting.getTransferBeadChecked ?? false;
                     getGem.IsChecked = setting.getGemChecked ?? false;

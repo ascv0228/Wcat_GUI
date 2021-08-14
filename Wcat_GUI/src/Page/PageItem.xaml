@@ -32,7 +32,7 @@
 
             <materialDesign:Card Grid.Column="0" Margin="7,7,3.5,7">
                 <Grid>
-                    <Grid  Grid.Row="1" x:Name="CardPanel1" Visibility="Hidden">
+                    <Grid  Grid.Row="1" x:Name="CardPanel1" Visibility="Visible">
                         <StackPanel>
                             <Label Content="角色篩選" HorizontalAlignment="Stretch" BorderBrush="LightGray" BorderThickness="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MouseLeftButtonUp="DisableReceivePanel" Margin="10,30,10,5"/>
                             <Grid>
@@ -397,7 +397,7 @@
                         </StackPanel>
 
                     </Grid>
-                    <Grid Grid.Row="1" x:Name="fragmentPanel1" Visibility="Visible">
+                    <Grid Grid.Row="1" x:Name="fragmentPanel1" Visibility="Hidden">
                         <StackPanel Grid.Row="0" Orientation="Vertical" Margin="0,5,0,0" DockPanel.Dock="Top" x:Name="FragmentRarityreceviePanel">
                             <Label Content="石板稀有度篩選" HorizontalAlignment="Stretch" BorderBrush="LightGray" BorderThickness="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MouseLeftButtonUp="DisableReceivePanel" Margin="10,10,10,5"/>
                             <Grid>

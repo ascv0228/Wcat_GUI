@@ -178,7 +178,7 @@ namespace Wcat_GUI
                         var normalAreas = QuestAction.GetNormalAreas();
                         for (int i = 0; i < normalAreas.Count; ++i)
                         {
-                            if (repeat || normalAreas[i].modeDataArray.Any(x => x.percent < 100))
+                            if (normalAreas[i].modeDataArray != null && (repeat || normalAreas[i].modeDataArray.Any(x => x.percent < 100)))
                             {
                                 var evt = new QuestListResponseData.Event();
                                 evt.locationId = evt.areaId = normalAreas[i].areaId;
