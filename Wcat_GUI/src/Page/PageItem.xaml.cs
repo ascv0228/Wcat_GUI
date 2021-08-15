@@ -49,7 +49,7 @@ namespace Wcat_GUI
         public Dictionary<string, List<string>> ChangedDict = new Dictionary<string, List<string>>();
         public ICollectionView cardsView1 { get; set; }
         public ObservableCollection<DeckShareData.Card> cards { get; set; }
-        public ObservableCollection<DeckShareData.Weapon> weapons { get; set; }
+        public ObservableCollection<WeaponShareData.Weapon> weapons { get; set; }
         private ExceptionHandler ItemCardHandler;
         private ExceptionHandler ItemWeaponHandler;
         private ExceptionHandler ItemItemHandler;
@@ -64,7 +64,7 @@ namespace Wcat_GUI
         public PageItem()
         {
             cards = new ObservableCollection<DeckShareData.Card>();
-            weapons = new ObservableCollection<DeckShareData.Weapon>();
+            weapons = new ObservableCollection<WeaponShareData.Weapon>();
 
             InitDeckList();
             InitWeaponList();

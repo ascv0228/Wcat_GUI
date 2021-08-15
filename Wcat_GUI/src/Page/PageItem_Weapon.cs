@@ -114,7 +114,7 @@ namespace Wcat_GUI
         {
             if (weapons?.Count == 0)
             {
-                var defaultWeapon = new DeckShareData.Weapon()
+                var defaultWeapon = new WeaponShareData.Weapon()
                 {
                     weaponInfo = "不選擇",
                     wId = -1
@@ -212,6 +212,10 @@ namespace Wcat_GUI
                                         break;
                                     }
                                 }
+                                if(weapon != infos)
+                                {
+                                    AllItemAction.ItemWeaponDict.SetValue(weapon.uwId, weapon);
+                                }
                             }
                             catch (NullReferenceException)
                             {
@@ -228,8 +232,7 @@ namespace Wcat_GUI
                     {
                         UnLockAllItemBtn();
                         autoCompoWeapon.Background = (Brush)new BrushConverter().ConvertFromString("#FF2196F3");
-                        autoCompoWeapon.Content = "武器合成";
-                        AllItemAction.SetCardWeaponList();
+                        autoCompoWeapon.Content = "武器強化";
                     });
 
                 });

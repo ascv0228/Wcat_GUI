@@ -27,7 +27,7 @@ namespace Wcat_GUI
         public ICollectionView cardsView4 { get; set; }
         public ICollectionView weaponsView { get; set; }
         public ObservableCollection<DeckShareData.Card> cards { get; set; }
-        public ObservableCollection<DeckShareData.Weapon> weapons { get; set; }
+        public ObservableCollection<WeaponShareData.Weapon> weapons { get; set; }
 
         private ExceptionHandler mainHandler;
         private CustomWriter mainWriter;
@@ -35,7 +35,7 @@ namespace Wcat_GUI
         public PageHome()
         {
             cards = new ObservableCollection<DeckShareData.Card>();
-            weapons = new ObservableCollection<DeckShareData.Weapon>();
+            weapons = new ObservableCollection<WeaponShareData.Weapon>();
 
             InitDeckList();
 
