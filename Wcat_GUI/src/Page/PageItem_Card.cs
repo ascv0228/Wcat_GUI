@@ -79,7 +79,7 @@ namespace Wcat_GUI
         {
             if (cards?.Count == 0)
             {
-                var defaultCard = new DeckShareData.Card()
+                var defaultCard = new CardShareData.Card()
                 {
                     cardInfo = "不選擇",
                     cId = -1

@@ -26,7 +26,7 @@ namespace Wcat_GUI
         public ICollectionView cardsView3 { get; set; }
         public ICollectionView cardsView4 { get; set; }
         public ICollectionView weaponsView { get; set; }
-        public ObservableCollection<DeckShareData.Card> cards { get; set; }
+        public ObservableCollection<CardShareData.Card> cards { get; set; }
         public ObservableCollection<WeaponShareData.Weapon> weapons { get; set; }
 
         private ExceptionHandler mainHandler;
@@ -34,7 +34,7 @@ namespace Wcat_GUI
 
         public PageHome()
         {
-            cards = new ObservableCollection<DeckShareData.Card>();
+            cards = new ObservableCollection<CardShareData.Card>();
             weapons = new ObservableCollection<WeaponShareData.Weapon>();
 
             InitDeckList();
@@ -125,7 +125,7 @@ namespace Wcat_GUI
         {
             if (cards?.Count == 0)
             {
-                var defaultCard = new DeckShareData.Card()
+                var defaultCard = new CardShareData.Card()
                 {
                     cardInfo = "不選擇",
                     cId = -1
@@ -155,6 +155,7 @@ namespace Wcat_GUI
 
         private void BtnRefreshClick(object sender, EventArgs e)
         {
+            InitUserProperties();
             btnUpdate.IsEnabled = false;
             btnRefresh.IsEnabled = false;
 
@@ -164,7 +165,6 @@ namespace Wcat_GUI
                 {
                     PageHomeAction.StartUpdateDeck();
                     UpdateLocalTroopInfo();
-                    InitUserProperties();
 
 
                     mainWriter.WriteLine("載入資料...");
@@ -187,12 +187,13 @@ namespace Wcat_GUI
 
         private void BtnUpdateClick(object sender, EventArgs e)
         {
-            var updateCards = new List<DeckShareData.Card>();
+            InitUserProperties();
+            var updateCards = new List<CardShareData.Card>();
 
-            var card1 = (DeckShareData.Card)troop1.SelectedItem;
-            var card2 = (DeckShareData.Card)troop2.SelectedItem;
-            var card3 = (DeckShareData.Card)troop3.SelectedItem;
-            var card4 = (DeckShareData.Card)troop4.SelectedItem;
+            var card1 = (CardShareData.Card)troop1.SelectedItem;
+            var card2 = (CardShareData.Card)troop2.SelectedItem;
+            var card3 = (CardShareData.Card)troop3.SelectedItem;
+            var card4 = (CardShareData.Card)troop4.SelectedItem;
 
             if (card1 != null && card1.cId != -1) updateCards.Add(card1);
             if (card2 != null && card2.cId != -1) updateCards.Add(card2);
@@ -209,7 +210,6 @@ namespace Wcat_GUI
                 mainHandler.GlobalTryCatch(() =>
                 {
                     PageHomeAction.StartUpdateTroop(updateCards);
-                    InitUserProperties();
                 });
 
                 Dispatcher.Invoke(() =>
@@ -349,7 +349,7 @@ namespace Wcat_GUI
             {
                 viewSource.Filter = (x =>
                 {
-                    if (((DeckShareData.Card)x).cardInfo.ToLower().Contains(sb.Text.ToLower())) return true;
+                    if (((CardShareData.Card)x).cardInfo.ToLower().Contains(sb.Text.ToLower())) return true;
                     else return false;
                 });
             }
@@ -357,7 +357,7 @@ namespace Wcat_GUI
 
         Predicate<object> loveFilterFuc = (x =>
         {
-            var nx = ((DeckShareData.Card)x);
+            var nx = ((CardShareData.Card)x);
             if (nx.heroFlag != 0) return false;
             else if (nx.cId == -1 || nx.love < nx.loveMax) return true;
             else return false;
@@ -374,7 +374,7 @@ namespace Wcat_GUI
             {
                 viewSource.Filter = (x =>
                 {
-                    var nx = ((DeckShareData.Card)x);
+                    var nx = ((CardShareData.Card)x);
                     if (nx.heroFlag != 0) return false;
                     else if ((nx.cId == -1 || nx.love < nx.loveMax) && nx.cardInfo.ToLower().Contains(sb.Text.ToLower())) return true;
                     else return false;

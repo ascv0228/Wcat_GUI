@@ -102,6 +102,7 @@ namespace Wcat_GUI
                 autoCompoFragment.IsEnabled = true;
                 autoCompoFragment.Background = (Brush)new BrushConverter().ConvertFromString("#FFCBA9E5");
                 autoCompoFragment.Content = "停止";
+                bool FragmentFilterSpecialRuneChecked = (FragmentFilterSpecialRune.IsChecked ?? false);
                 /**************************************/
 
                 ItemFragmentThread = new Thread(() =>
@@ -128,7 +129,7 @@ namespace Wcat_GUI
                             else
                             {
                                 ItemFragmentWriter.WriteLine($"升級{elem.name}失敗");
-                                if (FragmentFilterSpecialRune.IsChecked ?? false)
+                                if (FragmentFilterSpecialRuneChecked)
                                 {
                                     foreach (var elem2 in FragmentAction.GetFragmentSpecialCostItemList(elem.ufId))
                                     {
