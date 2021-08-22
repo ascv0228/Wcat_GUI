@@ -270,7 +270,6 @@ namespace Wcat_GUI
                 {
                     ItemWeaponHandler.GlobalTryCatch(() =>
                     {
-                        AllItemAction.SetCardWeaponList();
                         while (true)
                         {
                             ItemWeaponWriter.WriteLine($"接收");
