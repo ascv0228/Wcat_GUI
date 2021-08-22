@@ -359,7 +359,7 @@ namespace Wcat_GUI
         {
             var nx = ((CardShareData.Card)x);
             if (nx.heroFlag != 0) return false;
-            else if (nx.cId == -1 || nx.love < nx.loveMax) return true;
+            else if (nx.cId == -1 || nx.loveLevel < nx.loveMaxLevel) return true;
             else return false;
         });
 
@@ -376,7 +376,7 @@ namespace Wcat_GUI
                 {
                     var nx = ((CardShareData.Card)x);
                     if (nx.heroFlag != 0) return false;
-                    else if ((nx.cId == -1 || nx.love < nx.loveMax) && nx.cardInfo.ToLower().Contains(sb.Text.ToLower())) return true;
+                    else if ((nx.cId == -1 || nx.loveLevel < nx.loveMaxLevel) && nx.cardInfo.ToLower().Contains(sb.Text.ToLower())) return true;
                     else return false;
                 });
             }

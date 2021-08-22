@@ -212,7 +212,7 @@ namespace Wcat_GUI
                                         break;
                                     }
                                 }
-                                if(weapon != infos)
+                                if (weapon != infos)
                                 {
                                     AllItemAction.ItemWeaponDict.SetValue(weapon.uwId, weapon);
                                 }
@@ -270,10 +270,7 @@ namespace Wcat_GUI
                 {
                     ItemWeaponHandler.GlobalTryCatch(() =>
                     {
-                        if (AllItemAction.ItemWeapons == null)
-                        {
-                            AllItemAction.SetCardWeaponList();
-                        }
+                        AllItemAction.SetCardWeaponList();
                         while (true)
                         {
                             ItemWeaponWriter.WriteLine($"接收");
@@ -292,7 +289,6 @@ namespace Wcat_GUI
                         UnLockAllItemBtn();
                         autoCombine.Background = (Brush)new BrushConverter().ConvertFromString("#FF2196F3");
                         autoCombine.Content = "武器合成";
-                        AllItemAction.SetCardWeaponList();
                     });
                 });
 
