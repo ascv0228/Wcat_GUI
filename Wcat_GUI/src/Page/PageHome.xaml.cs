@@ -383,6 +383,7 @@ namespace Wcat_GUI
         }
         private void BtnClearTerminalClick(object sender, EventArgs e)
         {
+            terminal.Text = string.Empty;
             mainWriter.Clear();
             PageItem.ItemTerminals_Clear();
             PagePresent.PresentTerminals_Clear();

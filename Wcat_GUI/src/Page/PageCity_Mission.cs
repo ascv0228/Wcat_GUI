@@ -93,9 +93,63 @@ namespace Wcat_GUI
         }
         private void MusicAllListBtnClick(object sender, RoutedEventArgs e)
         {
+            if (MissionThread?.IsAlive ?? false)
+            {
+                return;
+            }
+            else
+            {
+                MissionWriter.WriteLine("開始顯示未完成音樂");
+                /**************************************/
+                MusicAllListbtn.IsEnabled = false;
+                /**************************************/
+
+                MissionThread = new Thread(() =>
+                {
+                    MissionHandler.GlobalTryCatch(() =>
+                    {
+                        MusicAction.GetUnlockMusicList(false);
+                    });
+
+                    Dispatcher.Invoke(() =>
+                    {
+                        MusicAllListbtn.IsEnabled = true;
+                        MissionWriter.WriteLine("顯示未完成音樂 結束");
+                    });
+
+                });
+                MissionThread.Start();
+            }
         }
         private void MusicCompleteBtnClick(object sender, RoutedEventArgs e)
         {
+            if (MissionThread?.IsAlive ?? false)
+            {
+                return;
+            }
+            else
+            {
+                MissionWriter.WriteLine("開始解放未完成音樂");
+                /**************************************/
+                MusicCompletebtn.IsEnabled = false;
+                /**************************************/
+
+                MissionThread = new Thread(() =>
+                {
+                    MissionHandler.GlobalTryCatch(() =>
+                    {
+                        MusicAction.CompleteMusic();
+                    });
+
+                    Dispatcher.Invoke(() =>
+                    {
+                        MusicCompletebtn.IsEnabled = true;
+                        MissionWriter.WriteLine("解放未完成音樂 結束");
+                    });
+
+                });
+                MissionThread.Start();
+            }
         }
         private void MissionBtnEndClick(object sender, RoutedEventArgs e)
         {

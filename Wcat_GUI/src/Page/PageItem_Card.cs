@@ -276,6 +276,7 @@ namespace Wcat_GUI
                         UnLockAllItemBtn();
                         autoLevelUp150.Background = (Brush)new BrushConverter().ConvertFromString("#FF2196F3");
                         autoLevelUp150.Content = "升級150";
+                        ItemCardWriter.WriteLine("結束升級全角色至LV150");
                     });
                 });
 
@@ -356,6 +357,7 @@ namespace Wcat_GUI
                         UnLockAllItemBtn();
                         autoTalkRead.Background = (Brush)new BrushConverter().ConvertFromString("#FF2196F3");
                         autoTalkRead.Content = "閱讀劇情";
+                        ItemCardWriter.WriteLine("結束閱讀劇情");
                     });
                 });
 
@@ -431,6 +433,7 @@ namespace Wcat_GUI
                         UnLockAllItemBtn();
                         autoExceed.Background = (Brush)new BrushConverter().ConvertFromString("#FF2196F3");
                         autoExceed.Content = "突破界限";
+                        ItemCardWriter.WriteLine("結束全角色突破界限");
                     });
                 });
 
@@ -496,6 +499,7 @@ namespace Wcat_GUI
                         UnLockAllItemBtn();
                         autoSkillLevelUp.Background = (Brush)new BrushConverter().ConvertFromString("#FF2196F3");
                         autoSkillLevelUp.Content = "技能覺醒";
+                        ItemCardWriter.WriteLine("結束全角色技能覺醒");
                     });
                 });
 
@@ -660,6 +664,70 @@ namespace Wcat_GUI
         }
         private void AutoLoveUpToMaxClick(object sender, EventArgs e)
         {
+            if ($"{autoLoveUpToMax.Background}" == "#FFCBA9E5")
+            {
+                ItemCardWriter.WriteLine("停止全角色親密度增加");
+                ItemCardThread?.Interrupt();
+            }
+            else if (ItemCardThread?.IsAlive ?? false)
+            {
+                return;
+            }
+            else if (autoLoveUpToMax.Background.ToString() == "#FF2196F3")
+            {
+                ItemCardWriter.WriteLine("開始全角色親密度增加");
+                /**************************************/
+                LockAllItemBtn("ItemCard");
+                autoLoveUpToMax.IsEnabled = true;
+                autoLoveUpToMax.Background = (Brush)new BrushConverter().ConvertFromString("#FFCBA9E5");
+                autoLoveUpToMax.Content = "停止";
+                /**************************************/
+
+                ItemCardThread = new Thread(() =>
+                {
+                    ItemCardHandler.GlobalTryCatch(() =>
+                    {
+                        if (AllItemAction.ItemCards == null)
+                        {
+                            AllItemAction.SetCardWeaponList();
+                        }
+                        
+                        foreach (var card in AllItemAction.ItemCards)
+                        {
+                            if (CardAction.isCardLoveMax(card, "level")) continue;
+
+                            try
+                            {
+                                var flag = CardAction.ExecCardAddLove(card.ucId, "level");
+                                if (!flag) break;
+                            }
+                            catch (NullReferenceException)
+                            {
+                                ItemCardWriter.WriteLine($"{card.name}親密度增加時發生錯誤");
+                            }
+                            catch (ArgumentNullException)
+                            {
+                                ItemCardWriter.WriteLine($"{card.name}親密度增加時發生錯誤");
+                            }
+                        }
+                        ItemCardWriter.WriteLine("結束全角色親密度增加");
+                    });
+
+                    Dispatcher.Invoke(() =>
+                    {
+                        UnLockAllItemBtn();
+                        autoLoveUpToMax.Background = (Brush)new BrushConverter().ConvertFromString("#FF2196F3");
+                        autoLoveUpToMax.Content = "親密度增加";
+                    });
+                });
+
+                ItemCardThread.Start();
+            }
+            else
+            {
+                ItemCardWriter.WriteLine($"這是{autoLoveUpToMax.Background}");
+            }
+
         }
         private void ACardLevelUp100Click(object sender, EventArgs e)
         {

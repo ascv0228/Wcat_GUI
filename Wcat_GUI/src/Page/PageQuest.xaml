@@ -235,7 +235,7 @@
                             <Button x:Name="CoopQuestbtnStart" Click="CoopQuestBtnStartClick" Height="33" Width="80" Style="{DynamicResource MaterialDesignRaisedButton}" VerticalAlignment="Bottom" Content="開始" Margin="10,0,0,0"/>
                         </StackPanel>
                     </Grid>
-                    <Grid Grid.Row="1" x:Name="WeaponEnhancePanel1" Visibility="Visible">
+                    <Grid Grid.Row="1" x:Name="WeaponEnhancePanel1" Visibility="Hidden">
                         <StackPanel>
                             <Button Grid.Column="1" x:Name="autoEnhanceWeapon" Click="AutoWeaponEnhanceClick" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="25" Style="{DynamicResource MaterialDesignRaisedButton}" Content="武器一鍵淬鍊" Margin="10,10,10,10">
                                 <Button.ToolTip>
@@ -323,9 +323,9 @@
                             
                         </StackPanel>
                     </Grid>
-                    <Grid Grid.Row="1" x:Name="JetTravelPanel1" Visibility="Visible">
+                    <Grid Grid.Row="1" x:Name="JetTravelPanel1" Visibility="Hidden">
                     </Grid>
-                    <Grid Grid.Row="1" x:Name="ItemInjectPanel1" Visibility="Hidden">
+                    <Grid Grid.Row="1" x:Name="ItemInjectPanel1" Visibility="Visible">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="75"/>
@@ -334,7 +334,7 @@
                             </Grid.RowDefinitions>
                             <StackPanel Grid.Row="0">
                                 <Label Content="倍率修改" HorizontalAlignment="Stretch" BorderBrush="LightGray" BorderThickness="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="10,5,10,10"/>
-                                <TextBox x:Name="InjectpowerText" Grid.Column="0" Margin="10,0,10,10" Height="25" VerticalAlignment="Stretch" HorizontalContentAlignment="Left" PreviewTextInput="OnPowerPreviewTextInput">
+                                <TextBox x:Name="InjectpowerText" Grid.Column="0" Margin="10,0,10,10" Height="25" VerticalAlignment="Stretch" HorizontalContentAlignment="Left" PreviewTextInput="OnPowerPreviewTextInput"  VerticalContentAlignment="Center" >
                                     <TextBox.Style>
                                         <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
                                             <Style.Resources>

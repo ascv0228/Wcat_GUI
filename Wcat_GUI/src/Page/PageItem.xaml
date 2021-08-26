@@ -163,7 +163,7 @@
                                     <Button.ToolTip>
                                         <ToolTip>
                                             <StackPanel>
-                                                <TextBlock Text="使用符文&quot;精心好禮&quot;提升角色親密度" />
+                                                <TextBlock Text="使用符文&quot;精心好禮(2000000、2000001)&quot;提升角色親密度" />
                                             </StackPanel>
                                         </ToolTip>
                                     </Button.ToolTip>

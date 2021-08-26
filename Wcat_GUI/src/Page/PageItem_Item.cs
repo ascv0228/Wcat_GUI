@@ -13,6 +13,7 @@ using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using Wcat;
+using Wcat.Action;
 using Wcat.PageAction;
 using Wcat.Stream;
 using Wcat_GUI.Exceptions;
@@ -67,7 +68,6 @@ namespace Wcat_GUI
         }
         private void AItemUseClick(object sender, RoutedEventArgs e)
         {
-
         }
 
         private void ItemItemBtnSelectClick(object sender, RoutedEventArgs e)
