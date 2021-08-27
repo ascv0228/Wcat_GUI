@@ -35,5 +35,36 @@ namespace Wcat_GUI
         {
             CatShopThread?.Interrupt();
         }
+        private void CatShopListBtnClick(object sender, RoutedEventArgs e)
+        {
+            if (CatShopThread?.IsAlive ?? false)
+            {
+                return;
+            }
+            else
+            {
+                CatShopWriter.WriteLine("開始顯示所有貓鋪");
+                /**************************************/
+                bool Filter = CatShopFilter_OnlyShowCanExchange.IsChecked ?? false;
+                CatShopAllListbtn.IsEnabled = false;
+                /**************************************/
+
+                CatShopThread = new Thread(() =>
+                {
+                    CatShopHandler.GlobalTryCatch(() =>
+                    {
+                        CatShopAction.CatShopAllInfo(Filter);
+                    });
+
+                    Dispatcher.Invoke(() =>
+                    {
+                        CatShopAllListbtn.IsEnabled = true;
+                        CatShopWriter.WriteLine("顯示所有貓鋪 結束");
+                    });
+
+                });
+                CatShopThread.Start();
+            }
+        }
     }
 }

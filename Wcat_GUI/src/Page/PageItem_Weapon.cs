@@ -197,7 +197,7 @@ namespace Wcat_GUI
                                 {
                                     if (weapon.hasEvolve > 0)
                                     {
-                                        weapon = WeaponAction.EvolveWeapon(weapon.uwId).result.weapon;
+                                        weapon = WeaponAction.EvolveWeapon(weapon.uwId, weapon.wId).result.weapon;
                                     }
                                     else if (weapon.level < weapon.levelMax)
                                     {

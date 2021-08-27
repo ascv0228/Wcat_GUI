@@ -32,7 +32,7 @@
 
             <materialDesign:Card Grid.Column="0" Margin="7,7,3.5,7">
                 <Grid>
-                    <Grid Grid.Row="0" x:Name="MissionPanel1" Visibility="Visible">
+                    <Grid Grid.Row="0" x:Name="MissionPanel1" Visibility="Hidden">
                         <StackPanel>
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -60,8 +60,16 @@
                         <StackPanel>
                         </StackPanel>
                     </Grid>
-                    <Grid Grid.Row="0" x:Name="CatShopPanel1" Visibility="Hidden">
+                    <Grid Grid.Row="0" x:Name="CatShopPanel1" Visibility="Visible">
                         <StackPanel>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox Grid.Column="0" x:Name="CatShopFilter_OnlyShowCanExchange" Content="只顯示可交易內容" HorizontalAlignment="Stretch" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                                <Button x:Name="CatShopAllListbtn" Click="CatShopListBtnClick" Height="33" Width="100"  Style="{DynamicResource MaterialDesignRaisedButton}" VerticalAlignment="Center" Content="所有交易"  Margin="0,30,0,0"/>
+                            </Grid>
                         </StackPanel>
                     </Grid>
                 </Grid>
@@ -69,7 +77,7 @@
 
             <materialDesign:Card Grid.Column="1" Margin="3.5,7,7,7">
                 <Grid>
-                    <Grid Grid.Row="1" x:Name="MissionPanel2" Visibility="Visible">
+                    <Grid Grid.Row="1" x:Name="MissionPanel2" Visibility="Hidden">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="25"/>
                             <RowDefinition/>
@@ -93,7 +101,7 @@
                                 </Style>
                             </TextBox.Style>
                         </TextBox>
-                        <StackPanel x:Name="modifyPanel_Mission" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" DockPanel.Dock="Bottom" Margin="0,0,0,20">
+                        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" DockPanel.Dock="Bottom" Margin="0,0,0,20">
                             <Button x:Name="MissionbtnEnd" Click="MissionBtnEndClick" Height="33" Width="80"  Style="{DynamicResource MaterialDesignRaisedButton}" VerticalAlignment="Bottom" Content="停止" IsEnabled="False"/>
                         </StackPanel>
                     </Grid>
@@ -153,7 +161,7 @@
                             <Button x:Name="ShopbtnEnd" Click="ShopBtnEndClick" Height="33" Width="80"  Style="{DynamicResource MaterialDesignRaisedButton}" VerticalAlignment="Bottom" Content="停止" IsEnabled="False"/>
                         </StackPanel>
                     </Grid>
-                    <Grid Grid.Row="1" x:Name="CatShopPanel2" Visibility="Hidden">
+                    <Grid Grid.Row="1" x:Name="CatShopPanel2" Visibility="Visible">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="25"/>
                             <RowDefinition/>
@@ -177,7 +185,7 @@
                                 </Style>
                             </TextBox.Style>
                         </TextBox>
-                        <StackPanel x:Name="modifyPanel_CatShop" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" DockPanel.Dock="Bottom" Margin="0,0,0,20">
+                        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" DockPanel.Dock="Bottom" Margin="0,0,0,20">
                             <Button x:Name="CatShopbtnEnd" Click="CatShopBtnEndClick" Height="33" Width="80"  Style="{DynamicResource MaterialDesignRaisedButton}" VerticalAlignment="Bottom" Content="停止" IsEnabled="False"/>
                         </StackPanel>
                     </Grid>

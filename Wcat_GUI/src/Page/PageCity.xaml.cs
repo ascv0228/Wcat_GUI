@@ -27,6 +27,12 @@ namespace Wcat_GUI
     {
         private ExceptionHandler MissionHandler;
         private static CustomWriter MissionWriter;
+        private ExceptionHandler BuildingHandler;
+        private static CustomWriter BuildingWriter;
+        private ExceptionHandler ShopHandler;
+        private static CustomWriter ShopWriter;
+        private ExceptionHandler CatShopHandler;
+        private static CustomWriter CatShopWriter;
 
         public PageCity()
         {
@@ -34,9 +40,16 @@ namespace Wcat_GUI
 
             MissionWriter = new CustomWriter(MissionTerminal);
             MissionHandler = new ExceptionHandler(MissionWriter);
+            BuildingWriter = new CustomWriter(BuildingTerminal);
+            BuildingHandler = new ExceptionHandler(BuildingWriter);
+            ShopWriter = new CustomWriter(ShopTerminal);
+            ShopHandler = new ExceptionHandler(ShopWriter);
+            CatShopWriter = new CustomWriter(CatShopTerminal);
+            CatShopHandler = new ExceptionHandler(CatShopWriter);
 
 
             Buffers.pageCityMissionMsgs.CollectionChanged += OnCollectionChanged_Mission;
+            Buffers.pageCatShopMsgs.CollectionChanged += OnCollectionChanged_CatShop;
         }
 
 
@@ -51,14 +64,25 @@ namespace Wcat_GUI
                 }
             }
         }
+        private void OnCollectionChanged_CatShop(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.Action == NotifyCollectionChangedAction.Add)
+            {
+                foreach (string str in e.NewItems)
+                {
+                    CatShopWriter.WriteLine($"{str}");
+                    Buffers.pageCatShopMsgs.Remove(str);
+                }
+            }
+        }
 
         public static void CityTerminals_Clear()
         {
             MissionWriter.Clear();
-            //ItemWeaponWriter.Clear();
             //ItemItemWriter.Clear();
             //ItemAccessoryWriter.Clear();
             //ItemFragmentWriter.Clear();
+            CatShopWriter.Clear();
         }
 
         private void terminal_TextChanged(object sender, TextChangedEventArgs e)

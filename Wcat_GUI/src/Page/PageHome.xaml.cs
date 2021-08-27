@@ -220,7 +220,6 @@ namespace Wcat_GUI
             }).Start();
         }
 
-
         private void OnTextChanged1(object sender, TextChangedEventArgs e)
         {
             var sb = (TextBox)sender;
@@ -388,6 +387,7 @@ namespace Wcat_GUI
             PageItem.ItemTerminals_Clear();
             PagePresent.PresentTerminals_Clear();
             PageQuest.QuestTerminals_Clear();
+            PageCity.CityTerminals_Clear();
             WeaponSkillWindow.WeaponSkillWindowTerminals_Clear();
             DebugWindow.DebugWindow_Clear();
         }

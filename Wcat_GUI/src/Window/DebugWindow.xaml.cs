@@ -8,9 +8,11 @@ namespace Wcat_GUI
     /// </summary>
     public partial class DebugWindow : Window
     {
+        private static CustomWriter mainWriter;
         public DebugWindow()
         {
             InitializeComponent();
+            mainWriter = new CustomWriter(terminal);
         }
 
         private void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -20,7 +22,7 @@ namespace Wcat_GUI
         }
         public static void DebugWindow_Clear()
         {
-            Console.Clear();
+            mainWriter.Clear();
         }
     }
 }
