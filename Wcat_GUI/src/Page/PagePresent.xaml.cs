@@ -39,6 +39,7 @@ namespace Wcat_GUI
             public bool? getStickerChecked;
             public bool? getChenghaoChecked;
             public bool? getOtherChecked;
+            public bool? getRainbowruneChecked;
 
             public bool? sellAllChecked;
             public bool? sellNormalWeaponChecked;
@@ -99,6 +100,7 @@ namespace Wcat_GUI
                 getStickerChecked = getSticker.IsChecked,
                 getChenghaoChecked = getChenghao.IsChecked,
                 getOtherChecked = getOther.IsChecked,
+                getRainbowruneChecked = getRainbowrune.IsChecked,
 
                 sellAllChecked = sellAll.IsChecked,
                 sellNormalWeaponChecked = sellNormalWeapon.IsChecked,
@@ -137,6 +139,7 @@ namespace Wcat_GUI
                     getSticker.IsChecked = setting.getStickerChecked ?? false;
                     getChenghao.IsChecked = setting.getChenghaoChecked ?? false;
                     getOther.IsChecked = setting.getOtherChecked ?? false;
+                    getRainbowrune.IsChecked = setting.getRainbowruneChecked ?? false;
 
                     sellAll.IsChecked = setting.sellAllChecked ?? false;
                     sellNormalWeapon.IsChecked = setting.sellNormalWeaponChecked ?? false;

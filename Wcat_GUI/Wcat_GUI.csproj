@@ -97,7 +97,7 @@
 
   <ItemGroup>
     <Reference Include="Wcat">
-      <HintPath>D:\Wcat\Wcat\bin\Debug\netcoreapp3.1\Wcat.dll</HintPath>
+      <HintPath>D:\D\Code\Git\Wcat_GUI_Core\bin\Debug\netcoreapp3.1\Wcat.dll</HintPath>
     </Reference>
   </ItemGroup>
 

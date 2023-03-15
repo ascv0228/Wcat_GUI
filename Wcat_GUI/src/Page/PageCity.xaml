@@ -32,7 +32,7 @@
 
             <materialDesign:Card Grid.Column="0" Margin="7,7,3.5,7">
                 <Grid>
-                    <Grid Grid.Row="0" x:Name="MissionPanel1" Visibility="Hidden">
+                    <Grid Grid.Row="0" x:Name="MissionPanel1" Visibility="Visible">
                         <StackPanel>
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -60,7 +60,7 @@
                         <StackPanel>
                         </StackPanel>
                     </Grid>
-                    <Grid Grid.Row="0" x:Name="CatShopPanel1" Visibility="Visible">
+                    <Grid Grid.Row="0" x:Name="CatShopPanel1" Visibility="Hidden">
                         <StackPanel>
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -77,7 +77,7 @@
 
             <materialDesign:Card Grid.Column="1" Margin="3.5,7,7,7">
                 <Grid>
-                    <Grid Grid.Row="1" x:Name="MissionPanel2" Visibility="Hidden">
+                    <Grid Grid.Row="1" x:Name="MissionPanel2" Visibility="Visible">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="25"/>
                             <RowDefinition/>
@@ -161,7 +161,7 @@
                             <Button x:Name="ShopbtnEnd" Click="ShopBtnEndClick" Height="33" Width="80"  Style="{DynamicResource MaterialDesignRaisedButton}" VerticalAlignment="Bottom" Content="停止" IsEnabled="False"/>
                         </StackPanel>
                     </Grid>
-                    <Grid Grid.Row="1" x:Name="CatShopPanel2" Visibility="Visible">
+                    <Grid Grid.Row="1" x:Name="CatShopPanel2" Visibility="Hidden">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="25"/>
                             <RowDefinition/>

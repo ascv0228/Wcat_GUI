@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29709.97
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33502.453
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wcat_GUI", "Wcat_GUI\Wcat_GUI.csproj", "{E8DAC234-1308-4A69-B1E5-BE29F56EC842}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wcat", "..\..\Wcat\Wcat\Wcat.csproj", "{831E0D0D-FFFB-4F5E-AFFF-603E40E43F45}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wcat", "..\Wcat_GUI_Core\Wcat.csproj", "{3DEB7E73-F2EA-4BFD-96BC-B9049D1477F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{E8DAC234-1308-4A69-B1E5-BE29F56EC842}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E8DAC234-1308-4A69-B1E5-BE29F56EC842}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E8DAC234-1308-4A69-B1E5-BE29F56EC842}.Release|Any CPU.Build.0 = Release|Any CPU
-		{831E0D0D-FFFB-4F5E-AFFF-603E40E43F45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{831E0D0D-FFFB-4F5E-AFFF-603E40E43F45}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{831E0D0D-FFFB-4F5E-AFFF-603E40E43F45}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{831E0D0D-FFFB-4F5E-AFFF-603E40E43F45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DEB7E73-F2EA-4BFD-96BC-B9049D1477F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DEB7E73-F2EA-4BFD-96BC-B9049D1477F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DEB7E73-F2EA-4BFD-96BC-B9049D1477F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DEB7E73-F2EA-4BFD-96BC-B9049D1477F6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

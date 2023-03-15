@@ -31,7 +31,7 @@
 
             <materialDesign:Card Grid.Column="0" Margin="7,7,3.5,7">
                 <Grid>
-                    <Grid Grid.Row="1" x:Name="SoloQuestPanel1" Visibility="Hidden">
+                    <Grid Grid.Row="1" x:Name="SoloQuestPanel1" Visibility="Visible">
                         <StackPanel>
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -325,7 +325,7 @@
                     </Grid>
                     <Grid Grid.Row="1" x:Name="JetTravelPanel1" Visibility="Hidden">
                     </Grid>
-                    <Grid Grid.Row="1" x:Name="ItemInjectPanel1" Visibility="Visible">
+                    <Grid Grid.Row="1" x:Name="ItemInjectPanel1" Visibility="Hidden">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="75"/>
@@ -381,13 +381,13 @@
                             </StackPanel>
                         </Grid>
                     </Grid>
-                    <Grid Grid.Row="1" x:Name="ExplorePanel1" Visibility="Visible">
+                    <Grid Grid.Row="1" x:Name="ExplorePanel1" Visibility="Hidden">
                     </Grid>
                 </Grid>
             </materialDesign:Card>
             <materialDesign:Card Grid.Column="1" Margin="3.5,7,7,7">
                 <Grid>
-                    <Grid Grid.Row="1" x:Name="SoloQuestPanel2" Visibility="Hidden">
+                    <Grid Grid.Row="1" x:Name="SoloQuestPanel2" Visibility="Visible">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="80"/>
                             <RowDefinition/>
@@ -617,7 +617,7 @@
                             <Button x:Name="btnAddCoopQuest" Click="BtnAddCoopQuestClick" Height="33" Width="80"  Style="{DynamicResource MaterialDesignRaisedButton}" VerticalAlignment="Bottom" Content="加入" Margin="10,0,0,0"/>
                         </StackPanel>
                     </Grid>
-                    <Grid Grid.Row="1" x:Name="WeaponEnhancePanel2" Visibility="Visible">
+                    <Grid Grid.Row="1" x:Name="WeaponEnhancePanel2" Visibility="Hidden">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="25"/>
                             <RowDefinition/>
@@ -645,7 +645,7 @@
                             <Button x:Name="WeaponEnhancebtnEnd" Click="WeaponEnhanceBtnEndClick" Height="33" Width="80"  Style="{DynamicResource MaterialDesignRaisedButton}" VerticalAlignment="Bottom" Content="停止" IsEnabled="False"/>
                         </StackPanel>
                     </Grid>
-                    <Grid Grid.Row="1" x:Name="JetTravelPanel2" Visibility="Visible">
+                    <Grid Grid.Row="1" x:Name="JetTravelPanel2" Visibility="Hidden">
                     </Grid>
                     <Grid Grid.Row="1" x:Name="ItemInjectPanel2" Visibility="Hidden">
                         <Grid>
@@ -787,7 +787,7 @@
                             </StackPanel>
                         </Grid>
                     </Grid>
-                    <Grid Grid.Row="1" x:Name="ExplorePanel2" Visibility="Visible">
+                    <Grid Grid.Row="1" x:Name="ExplorePanel2" Visibility="Hidden">
                     </Grid>
                 </Grid>
             </materialDesign:Card>
